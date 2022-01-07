@@ -1,16 +1,36 @@
 {
   "name": "biosimreg-ui",
   "version": "0.1.0",
+  "author": "Enoch Klufio",
   "private": true,
+  "description": "React version of Biometric Sim Registration Applicaton for AirtelTigo",
+  "engines": {
+    "node": "14 || 15 || 16",
+    "npm": ">=6"
+  },
   "dependencies": {
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.7",
+    "@mui/styled-engine": "^5.2.6",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "daisyui": "^1.21.0",
+    "chart.js": "^3.7.0",
+    "chroma-js": "^2.1.2",
     "react": "^17.0.2",
+    "react-chartjs-2": "^4.0.0",
     "react-dom": "^17.0.2",
+    "react-github-btn": "^1.2.1",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.2"
+    "react-table": "^7.7.0",
+    "stylis": "^4.0.13",
+    "stylis-plugin-rtl": "^2.1.1",
+    "web-vitals": "^2.1.2",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,8 +57,13 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.1",
-    "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.11"
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^2.5.1"
   }
 }
