@@ -2,15 +2,19 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 // layouts
-import Admin from "./layouts/Admin";
 import Auth from "./layouts/Auth";
+import Index from "./layouts/Index";
+
+// Views
+import NotFound from "./views/404/NotFound";
 
 const App = () => {
   return (
     <>
       <Routes>
         <Route path="/auth/*" element={<Auth />} />
-        <Route path="/admin/*" element={<Admin />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="/*" element={<Index />} />
       </Routes>
     </>
   );
