@@ -5,9 +5,7 @@ export default function FooterSmall(props) {
     <>
       <footer
         className={
-          (props.absolute
-            ? "absolute w-full bottom-0 bg-blueGray-800"
-            : "relative") + " pb-6"
+          (props.absolute ? "absolute w-full bottom-0 bg-blueGray-800" : "relative") + " pb-6"
         }
       >
         <div className="container mx-auto px-4">
@@ -17,10 +15,10 @@ export default function FooterSmall(props) {
               <div className="text-sm text-blueGray-500 font-semibold py-1 text-center md:text-left">
                 Copyright © {new Date().getFullYear()}{" "}
                 <a
-                  href="https://www.creative-tim.com?ref=nr-footer-small"
+                  href="#"
                   className="text-white hover:text-blueGray-300 text-sm font-semibold py-1"
                 >
-                  Creative Tim
+                  Solutions Team
                 </a>
               </div>
             </div>
@@ -28,34 +26,22 @@ export default function FooterSmall(props) {
               <ul className="flex flex-wrap list-none md:justify-end  justify-center">
                 <li>
                   <a
-                    href="https://www.creative-tim.com?ref=nr-footer-small"
+                    href="https://www.airteltigo.com.gh"
                     className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
+                    target="_blank"
+                    rel="noreferrer"
                   >
-                    Creative Tim
+                    AirtelTigo
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://www.creative-tim.com/presentation?ref=nr-footer-small"
+                    href="https://www.airteltigo.com.gh/profile"
                     className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     About Us
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="http://blog.creative-tim.com?ref=nr-footer-small"
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
-                  >
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/creativetimofficial/notus-react/blob/main/LICENSE.md?ref=nr-footer-small"
-                    className="text-white hover:text-blueGray-300 text-sm font-semibold block py-1 px-3"
-                  >
-                    MIT License
                   </a>
                 </li>
               </ul>
