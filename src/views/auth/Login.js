@@ -3,14 +3,9 @@ import { IoLogIn } from "react-icons/io5";
 import AuthContext from "../../context/auth/AuthContext";
 import { login } from "../../context/auth/AuthActions";
 
-const initialState = {
-  username: "",
-  password: "",
-};
-
 const Login = () => {
-  const { dispatch } = useContext(AuthContext);
   const [formData, setFormData] = useState(initialState);
+  const { dispatch } = useContext(AuthContext);
   const { username, password } = formData;
 
   // Handle form change
@@ -85,6 +80,11 @@ const Login = () => {
       </form>
     </>
   );
+};
+
+const initialState = {
+  username: "",
+  password: "",
 };
 
 export default Login;
