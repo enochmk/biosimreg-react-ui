@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   username: "",
@@ -22,7 +22,6 @@ const Login = () => {
   // handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // reset inputs
     setFormData(initialState);
     navigate("/nia/registration");
@@ -30,7 +29,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="container mx-auto px-4 h-full">
+      <div className="container mx-auto px-4 h-full bg-bg-purple-200">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
@@ -87,20 +86,6 @@ const Login = () => {
                     </button>
                   </div>
                 </form>
-              </div>
-            </div>
-
-            {/* Forgot Password & Create Account */}
-            <div className="flex flex-wrap mt-6 relative">
-              <div className="w-1/2">
-                <Link to="/auth/forgot-password" className="text-blueGray-200">
-                  <small>Forgot Password?</small>
-                </Link>
-              </div>
-              <div className="w-1/2 text-right">
-                <Link to="/auth/register" className="text-blueGray-200">
-                  <small>Create new account</small>
-                </Link>
               </div>
             </div>
           </div>
