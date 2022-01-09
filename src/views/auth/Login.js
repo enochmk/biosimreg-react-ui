@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
+import { IoLogIn } from "react-icons/io5";
+import AuthContext from "../../context/auth/AuthContext";
+import { login } from "../../context/auth/AuthActions";
 
 const initialState = {
   username: "",
@@ -7,9 +9,9 @@ const initialState = {
 };
 
 const Login = () => {
+  const { dispatch } = useContext(AuthContext);
   const [formData, setFormData] = useState(initialState);
   const { username, password } = formData;
-  const navigate = useNavigate();
 
   // Handle form change
   const handleChange = (e) => {
@@ -22,75 +24,65 @@ const Login = () => {
   // handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // reset inputs
     setFormData(initialState);
-    navigate("/nia/registration");
+
+    const response = await login(formData);
+
+    if (response) {
+      dispatch({
+        type: "LOG_USER_IN",
+        payload: response,
+      });
+    }
+
+    if (!response) {
+      console.log("Invalid username and password");
+    }
   };
 
   return (
     <>
-      <div className="container mx-auto px-4 h-full bg-bg-purple-200">
-        <div className="flex content-center items-center justify-center h-full">
-          <div className="w-full lg:w-4/12 px-4">
-            <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
-              <div className="rounded-t mb-0 px-6 py-6">
-                <div className="text-center mb-3">
-                  <h6 className="text-blueGray-500 text-sm font-bold">Enter your credentials</h6>
-                </div>
-              </div>
-
-              {/* Form */}
-              <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form onSubmit={handleSubmit}>
-                  {/* Email */}
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Username
-                    </label>
-                    <input
-                      type="text"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Username"
-                      name="username"
-                      value={username}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Password
-                    </label>
-                    <input
-                      type="password"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      name="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <div className="text-center mt-6">
-                    <button
-                      type="submit"
-                      className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                    >
-                      Sign In
-                    </button>
-                  </div>
-                </form>
-              </div>
+      <form className="flex mx-auto" onSubmit={handleSubmit}>
+        <div className="card card-bordered shadow-2xl mx-auto w-4/12">
+          <div className="card-body">
+            <h2 className="card-title text-center text-3xl font-extrabold">Sign In</h2>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-muted">Username</span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered"
+                required
+                name="username"
+                value={username}
+                onChange={handleChange}
+              />
             </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                className="input input-bordered"
+                required
+                name="password"
+                value={password}
+                onChange={handleChange}
+              />
+            </div>
+
+            <footer className="justify-end space-x-2 card-actions">
+              <button className="btn btn-primary btn-block">
+                <IoLogIn />
+                Login
+              </button>
+            </footer>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 };

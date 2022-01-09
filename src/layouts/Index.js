@@ -1,8 +1,10 @@
+import { useContext } from "react";
 import { Navigate, Routes, Route } from "react-router-dom";
+import AuthContext from "../context/auth/AuthContext";
 
 // components
 // import AdminNavbar from "../components/Navbars/AdminNavbar";
-import HeaderStats from "../components/Headers/HeaderStats";
+// import HeaderStats from "../components/Headers/HeaderStats";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Footer from "../components/Footers/FooterAdmin";
 
@@ -14,6 +16,13 @@ import PassportReRegistration from "../views/passport/ReRegistration";
 import NotFound from "../views/404/NotFound";
 
 function Index() {
+  const { loggedIn } = useContext(AuthContext);
+
+  // Redirect if user is not assigned in
+  if (!loggedIn) {
+    return <Navigate to="/auth/login" />;
+  }
+
   return (
     <>
       <Sidebar />

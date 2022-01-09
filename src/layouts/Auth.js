@@ -1,5 +1,6 @@
-import React from "react";
+import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import AuthContext from "../context/auth/AuthContext";
 
 // components
 import Navbar from "../components/Navbars/AuthNavbar";
@@ -7,9 +8,15 @@ import FooterSmall from "../components/Footers/FooterSmall";
 
 // views
 import Login from "../views/auth/Login";
-import Register from "../views/auth/Register";
 
-function Auth() {
+const Auth = () => {
+  const { loggedIn } = useContext(AuthContext);
+
+  // Redirect if user is logged in.
+  if (loggedIn) {
+    return <Navigate to="/nia/registration" />;
+  }
+
   return (
     <>
       <Navbar transparent={false} />
@@ -23,7 +30,6 @@ function Auth() {
           ></div>
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
             <Route path="/" element={<Navigate to="/auth/login" />} />
           </Routes>
           <FooterSmall absolute />
@@ -31,6 +37,6 @@ function Auth() {
       </main>
     </>
   );
-}
+};
 
 export default Auth;
