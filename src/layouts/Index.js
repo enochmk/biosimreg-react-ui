@@ -15,7 +15,7 @@ import PassportRegistration from "../views/passport/Registration";
 import PassportReRegistration from "../views/passport/ReRegistration";
 import NotFound from "../views/404/NotFound";
 
-function Index() {
+export default function Index() {
   const { loggedIn } = useContext(AuthContext);
 
   // Redirect if user is not assigned in
@@ -42,5 +42,3 @@ function Index() {
     </>
   );
 }
-
-export default Index;

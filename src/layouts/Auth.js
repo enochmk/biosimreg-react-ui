@@ -9,7 +9,7 @@ import FooterSmall from "../components/Footers/FooterSmall";
 // views
 import Login from "../views/auth/Login";
 
-const Auth = () => {
+export default function Auth() {
   const { loggedIn } = useContext(AuthContext);
 
   // Redirect if user is logged in.
@@ -37,6 +37,4 @@ const Auth = () => {
       </main>
     </>
   );
-};
-
-export default Auth;
+}
