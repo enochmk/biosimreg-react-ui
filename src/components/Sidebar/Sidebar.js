@@ -68,12 +68,12 @@ export default function Sidebar() {
             {/* Divider */}
 
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            {/* <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Passport Card
-            </h6>
+            </h6> */}
 
             {/* Navigation */}
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none">
+            {/* <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
                 <Link
                   className={
@@ -117,7 +117,7 @@ export default function Sidebar() {
                   Re-Registration
                 </Link>
               </li>
-            </ul>
+            </ul> */}
 
             <hr className="my-4 md:min-w-full" />
           </div>
