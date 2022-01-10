@@ -8,6 +8,7 @@ import Index from "./layouts/Index";
 
 // Views
 import NotFound from "./views/404/NotFound";
+import Toast from "./components/Notifications/Toast";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/*" element={<Index />} />
         </Routes>
       </AuthProvider>
+      <Toast />
     </>
   );
 };
