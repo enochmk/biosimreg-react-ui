@@ -1,5 +1,7 @@
 import { useState, useContext } from "react";
 import AuthContext from "../../context/auth/AuthContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const ReRegistration = () => {
   const [form, setForm] = useState(initialState);
@@ -9,12 +11,12 @@ const ReRegistration = () => {
     e.preventDefault();
 
     const data = {
-      agentID: user.username,
       ...form,
+      agentID: user.username,
     };
 
-    console.log("Submitting data");
-    console.log(data);
+    // handleReset();
+    niaRegistration(data);
   };
 
   const handleChange = (e) => {
@@ -26,6 +28,30 @@ const ReRegistration = () => {
 
   const handleReset = () => {
     setForm(initialState);
+  };
+
+  const niaRegistration = async (data) => {
+    const config = {
+      method: "post",
+      url: "http://10.81.1.188:5002/v1/nonbiometric/reRegistrationBasic",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        // console.log(error);
+        if (error.response) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Something went wrong");
+        }
+      });
   };
 
   return (

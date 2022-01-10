@@ -3,7 +3,7 @@ import AuthContext from "../../context/auth/AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const Registration = () => {
+const MfsRegistration = () => {
   const [form, setForm] = useState(initialState);
   const { user } = useContext(AuthContext);
 
@@ -12,14 +12,11 @@ const Registration = () => {
 
     const data = {
       ...form,
-      forenames: "",
-      gender: "Male",
-      isMFS: true,
       agentID: user.username,
     };
 
-    console.log(data);
-    niaRegistration(data);
+    // handleReset();
+    mfsRegistration(data);
   };
 
   const handleChange = (e) => {
@@ -33,10 +30,10 @@ const Registration = () => {
     setForm(initialState);
   };
 
-  const niaRegistration = (data) => {
-    var config = {
+  const mfsRegistration = async (data) => {
+    const config = {
       method: "post",
-      url: "http://10.81.1.188:5002/v1/nonbiometric/registration",
+      url: "http://10.81.1.188:5002/v1/nonbiometric/registrationMfs",
       headers: {
         "Content-Type": "application/json",
       },
@@ -45,9 +42,10 @@ const Registration = () => {
 
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        console.log(response.data);
       })
       .catch(function (error) {
+        // console.log(error);
         if (error.response) {
           toast.error(error.response.data.message);
         } else {
@@ -61,7 +59,9 @@ const Registration = () => {
       <form className="flex mx-auto" onSubmit={handleSubmit}>
         <div className="card card-bordered shadow-2xl mx-auto w-4/12">
           <div className="card-body">
-            <h2 className="card-title text-center text-3xl font-extrabold">Register a Customer</h2>
+            <h2 className="card-title text-center text-3xl font-extrabold">
+              Register MFS Customer
+            </h2>
 
             <div className="form-control">
               <label className="label">
@@ -107,14 +107,42 @@ const Registration = () => {
 
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-muted">ICCID</span>
+                <span className="label-text text-muted">Forenames</span>
               </label>
               <input
                 type="text"
                 className="input input-bordered"
                 required
-                name="iccid"
-                value={form.iccid}
+                name="forenames"
+                value={form.forenames}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-muted">Gender</span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered"
+                required
+                name="gender"
+                value={form.gender}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-muted">Date Of Birth</span>
+              </label>
+              <input
+                type="text"
+                className="input input-bordered"
+                required
+                name="dateOfBirth"
+                value={form.dateOfBirth}
                 onChange={handleChange}
               />
             </div>
@@ -151,11 +179,13 @@ const Registration = () => {
 const initialState = {
   nationalID: "",
   surname: "",
+  forenames: "",
   msisdn: "",
-  iccid: "",
+  gender: "",
+  dateOfBirth: "",
   nextOfKin: "",
   agentID: "",
   channelID: "web",
 };
 
-export default Registration;
+export default MfsRegistration;

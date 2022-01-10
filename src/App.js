@@ -4,7 +4,7 @@ import { AuthProvider } from "./context/auth/AuthContext";
 
 // layouts
 import Auth from "./layouts/Auth";
-import Index from "./layouts/Index";
+import Home from "./layouts/Home";
 
 // Views
 import NotFound from "./views/404/NotFound";
@@ -17,7 +17,7 @@ const App = () => {
         <Routes>
           <Route path="/auth/*" element={<Auth />} />
           <Route path="/404" element={<NotFound />} />
-          <Route path="/*" element={<Index />} />
+          <Route path="/*" element={<Home />} />
         </Routes>
       </AuthProvider>
       <Toast />

@@ -11,6 +11,7 @@ import Footer from "../components/Footers/FooterAdmin";
 // views
 import NiaRegistration from "../views/nia/Registration";
 import NiaReRegistration from "../views/nia/ReRegistration";
+import MfsRegistration from "../views/nia/mfsRegistration";
 import PassportRegistration from "../views/passport/Registration";
 import PassportReRegistration from "../views/passport/ReRegistration";
 import NotFound from "../views/404/NotFound";
@@ -31,6 +32,7 @@ export default function Index() {
           <Routes>
             <Route path="nia/registration" element={<NiaRegistration />} />
             <Route path="nia/re-registration" element={<NiaReRegistration />} />
+            <Route path="nia/mfs-registration" element={<MfsRegistration />} />
             <Route path="passport/registration" element={<PassportRegistration />} />
             <Route path="passport/re-registration" element={<PassportReRegistration />} />
             <Route path="/" exact element={<Navigate to="/nia/registration" />} />
