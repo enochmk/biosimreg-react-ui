@@ -1,8 +1,12 @@
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { IoLogIn } from 'react-icons/io5';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import AuthContext from '../../context/auth/AuthContext';
+import * as authActions from '../../context/auth/AuthActions';
 
 import signInLogo from '../../assets/svg/sign_in_2.svg';
 
@@ -22,14 +26,25 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
 
   // handle form submit
   const onSubmit = async (data) => {
-    console.log(data);
+    const response = await authActions.login(data);
+
+    // no data found
+    if (!response) {
+      return toast.error('Invalid username and password');
+    }
+
+    // save to auth state
+    dispatch({
+      type: 'LOG_USER_IN',
+      payload: response,
+    });
 
     // credential valid
-    navigate('/admin/dashboard');
+    // navigate('/admin/dashboard');
   };
 
   return (
@@ -83,6 +98,17 @@ export default function Login() {
                             {errors.password?.message}
                           </p>
                         }
+                      </div>
+
+                      <div className="form-control">
+                        <label className="cursor-pointer label">
+                          <Link
+                            to="/auth/forgot-password"
+                            className="btn-link btn-ghost p-0 m-0"
+                          >
+                            forgot Password?
+                          </Link>
+                        </label>
                       </div>
 
                       <div className="justify-center card-actions">
