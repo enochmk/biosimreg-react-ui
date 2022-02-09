@@ -1,5 +1,6 @@
+import NotFound from '../notFound/NotFound';
 function BasicModification() {
-  return <h2>BasicModification</h2>;
+  return <NotFound />;
 }
 
 export default BasicModification;

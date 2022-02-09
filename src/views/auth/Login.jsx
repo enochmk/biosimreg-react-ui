@@ -42,16 +42,13 @@ export default function Login() {
       type: 'LOG_USER_IN',
       payload: response,
     });
-
-    // credential valid
-    // navigate('/admin/dashboard');
   };
 
   return (
     <section className="container mx-auto px-4 h-full min-h-full">
       <div className="flex content-center items-center justify-center">
         <div className="w-full lg:w-8/12 px-4">
-          <div className="card card-bordered shadow-2xl">
+          <div className="card card-bordered shadow-2xl shadow-black">
             <div className="flex row items-center justify-between">
               <div className="card-body w-1/2">
                 <h2 className="card-title text-center mb-3 font-bold text-3xl text-muted">
@@ -72,7 +69,7 @@ export default function Login() {
                           type="text"
                           placeholder="Username"
                           {...register('username')}
-                          className="input input-bordered shadow"
+                          className="input input-bordered shadow focus:ring"
                         />
                         {
                           <p className="text-error">
@@ -91,7 +88,7 @@ export default function Login() {
                           type="password"
                           placeholder="Password"
                           {...register('password')}
-                          className="input input-bordered shadow"
+                          className="input input-bordered shadow focus:ring "
                         />
                         {
                           <p className="text-error my-2">
@@ -100,24 +97,19 @@ export default function Login() {
                         }
                       </div>
 
-                      <div className="form-control">
-                        <label className="cursor-pointer label">
-                          <Link
-                            to="/auth/forgot-password"
-                            className="btn-link btn-ghost p-0 m-0"
-                          >
-                            forgot Password?
-                          </Link>
-                        </label>
-                      </div>
-
                       <div className="justify-center card-actions">
                         <button
                           type="submit"
                           className="btn btn-block btn-success"
                         >
-                          Sign In <IoLogIn className="items-center my-auto" />
+                          Sign In
                         </button>
+                        <Link
+                          to="/auth/forgot-password"
+                          className="btn btn-link text-blue-dark text-xs"
+                        >
+                          Forgot your password?
+                        </Link>
                       </div>
                     </form>
                   </div>
@@ -125,6 +117,9 @@ export default function Login() {
               </div>
             </div>
           </div>
+          <p class="text-center text-xs mt-4">
+            &copy;2022 Solutions Team. All rights reserved.
+          </p>
         </div>
       </div>
     </section>

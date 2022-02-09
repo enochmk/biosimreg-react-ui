@@ -62,7 +62,7 @@ export default function ForgotPassword() {
                           type="email"
                           placeholder="Email"
                           {...register('email')}
-                          className="input input-bordered shadow"
+                          className="input input-bordered shadow focus:ring"
                         />
                         {<p className="text-error">{errors.email?.message}</p>}
                       </div>
@@ -75,10 +75,7 @@ export default function ForgotPassword() {
                           Reset Password
                           <IoRefreshCircleOutline className="items-center my-auto" />
                         </button>
-                        <Link
-                          to="/auth/login"
-                          className="btn btn-outline btn-block btn-ghost"
-                        >
+                        <Link to="/auth/login" className="btn btn-link text-sm">
                           Back to Login
                         </Link>
                       </div>
@@ -88,6 +85,9 @@ export default function ForgotPassword() {
               </div>
             </div>
           </div>
+          <p class="text-center text-xs mt-4">
+            &copy;2022 Solutions Team. All rights reserved.
+          </p>
         </div>
       </div>
     </section>

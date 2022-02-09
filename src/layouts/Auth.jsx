@@ -2,8 +2,10 @@ import { useContext, useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
 import AuthContext from '../context/auth/AuthContext';
+import FooterSmall from '../components/Footers/FooterSmall';
 import ForgotPassword from '../views/auth/ForgotPassword';
 import Login from '../views/auth/Login';
+import Navbar from '../components/Navbars/AuthNavbar';
 import backgroundImage from '../assets/img/register_bg_2.png';
 import { toast } from 'react-toastify';
 
@@ -21,10 +23,12 @@ function Auth() {
 
   return (
     <>
+      <Navbar />
+
       <main>
         <section className="relative w-full h-full py-40 min-h-screen">
           <div
-            className="absolute top-0 w-full h-full bg-blueGray-800 bg-no-repeat bg-full"
+            className="absolute top-0 w-full h-full bg-gray-200 bg-no-repeat bg-full"
             style={backgroundStyle}
           ></div>
           <Routes>
@@ -32,6 +36,7 @@ function Auth() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/*" element={<Navigate to="/notfound" />} />
           </Routes>
+          <FooterSmall absolute />
         </section>
       </main>
     </>
