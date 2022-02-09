@@ -1,3 +1,5 @@
+import React from 'react';
+
 import CardStats from '../Cards/CardStats';
 
 export default function HeaderStats() {
