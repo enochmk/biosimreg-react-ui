@@ -30,7 +30,7 @@ export default function Admin() {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar title="AirtelTigo BIOSIMREG v2" />
       <main className="relative md:ml-64">
         <AdminNavbar />
         <HeaderStats />
