@@ -1,8 +1,7 @@
-import React from 'react';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 
-import AuthContext from '../context/auth/AuthContext';
 import FooterSmall from '../components/Footers/FooterSmall';
 import ForgotPassword from '../views/auth/ForgotPassword';
 import Login from '../views/auth/Login';
@@ -11,8 +10,8 @@ import backgroundImage from '../assets/img/register_bg_2.png';
 import { toast } from 'react-toastify';
 
 function Auth() {
-  const { loggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  const loggedIn = useSelector((state) => state.auth.value.loggedIn);
 
   // user is already signed in
   useEffect(() => {

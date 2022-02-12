@@ -1,5 +1,5 @@
-import React from 'react';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -7,7 +7,6 @@ import Sidebar from '../components/Sidebars/Sidebar';
 import AdminNavbar from '../components/Navbars/AdminNavbar';
 import HeaderStats from '../components/Headers/HeaderStats';
 import FooterAdmin from '../components/Footers/FooterAdmin';
-import AuthContext from '../context/auth/AuthContext';
 import Dashboard from '../views/admin/Dashboard';
 import NiaModification from '../views/nationalID/Modification';
 import NiaModificationSecurity from '../views/nationalID/ModificationSecurity';
@@ -17,8 +16,8 @@ import PassportModification from '../views/passport/Modification';
 import PassportRegistration from '../views/passport/Registration';
 
 export default function Admin() {
-  const { loggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  const loggedIn = useSelector((state) => state.auth.value.loggedIn);
 
   // user is not signed in
   useEffect(() => {

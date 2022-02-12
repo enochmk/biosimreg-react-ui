@@ -1,47 +1,42 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import * as yup from 'yup';
 import { toast } from 'react-toastify';
-import { IoLogIn } from 'react-icons/io5';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import AuthContext from '../../context/auth/AuthContext';
-import * as authActions from '../../context/auth/AuthActions';
 
+import loginSchema from '../../validation/loginSchema';
 import signInLogo from '../../assets/svg/sign_in_2.svg';
-
-const schema = yup
-  .object({
-    username: yup.string().required(),
-    password: yup.string().min(6).required(),
-  })
-  .required();
+import users from '../../data/Users';
+import { logUserIn } from '../../features/authSlice';
 
 export default function Login() {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(loginSchema),
   });
-
-  const { dispatch } = useContext(AuthContext);
 
   // handle form submit
   const onSubmit = async (data) => {
-    const response = await authActions.login(data);
+    const { username, password } = data;
 
-    // no data found
-    if (!response) {
-      return toast.error('Invalid username and password');
+    // Find user in users array
+    const user = users.find(
+      (user) =>
+        user.username.toLowerCase() === username.toLowerCase() &&
+        user.password === password,
+    );
+
+    if (!user) {
+      return toast.error('Invalid username or password');
     }
 
     // save to auth state
-    dispatch({
-      type: 'LOG_USER_IN',
-      payload: response,
-    });
+    dispatch(logUserIn(user));
   };
 
   return (

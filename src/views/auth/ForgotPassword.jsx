@@ -1,19 +1,11 @@
-import { useContext } from 'react';
-import * as yup from 'yup';
-import { toast } from 'react-toastify';
 import { IoRefreshCircleOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import AuthContext from '../../context/auth/AuthContext';
 
 import forgotPasswordLogo from '../../assets/svg/forgot_password.svg';
-import { Link } from 'react-router-dom';
-
-const schema = yup
-  .object({
-    email: yup.string().required(),
-  })
-  .required();
+import changePasswordSchema from '../../validation/changePasswordSchema';
 
 export default function ForgotPassword() {
   const {
@@ -21,10 +13,8 @@ export default function ForgotPassword() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(changePasswordSchema),
   });
-
-  // const { dispatch } = useContext(AuthContext);
 
   // handle form submit
   const onSubmit = async (data) => {
