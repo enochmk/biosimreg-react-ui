@@ -12,8 +12,8 @@ const SidebarItem = ({ title, data }) => {
       </h6>
 
       <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-        {data.map((item) => (
-          <li className="items-center">
+        {data.map((item, index) => (
+          <li key={index} className="items-center">
             <Link
               className={
                 'text-xs uppercase py-3 font-bold block ' +

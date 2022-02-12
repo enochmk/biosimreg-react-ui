@@ -1,8 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import UserDropdown from '../Dropdowns/UserDropdown';
+import { useSelector } from 'react-redux';
 
-export default function Navbar({ title }) {
+export default function Navbar() {
+  const title = useSelector((state) => state.navbar.value);
+
   return (
     <>
       <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
@@ -18,11 +20,3 @@ export default function Navbar({ title }) {
     </>
   );
 }
-
-Navbar.defaultProps = {
-  title: 'Dashboard',
-};
-
-Navbar.propTypes = {
-  title: PropTypes.string,
-};

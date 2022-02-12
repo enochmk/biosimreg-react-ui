@@ -1,13 +1,19 @@
-import React from 'react';
-
-// components
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import CardLineChart from '../../components/Cards/CardLineChart';
 import CardBarChart from '../../components/Cards/CardBarChart';
 import CardPageVisits from '../../components/Cards/CardPageVisits';
 import CardSocialTraffic from '../../components/Cards/CardSocialTraffic';
+import { changeTitle } from '../../features/navbarSlice';
 
 export default function Dashboard() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(changeTitle('Dashboard'));
+  }, []);
+
   return (
     <>
       <div className="flex flex-wrap">
