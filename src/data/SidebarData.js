@@ -24,21 +24,21 @@ const SidebarData = [
       },
     ],
   },
-  {
-    title: 'Passport',
-    data: [
-      {
-        title: 'Registration',
-        link: '/admin/passport/registration',
-        icon: 'fas fa-newspaper',
-      },
-      {
-        title: 'Re-Registration',
-        link: '/admin/passport/modification',
-        icon: 'fas fa-user-circle',
-      },
-    ],
-  },
+  // {
+  //   title: 'Passport',
+  //   data: [
+  //     {
+  //       title: 'Registration',
+  //       link: '/admin/passport/registration',
+  //       icon: 'fas fa-newspaper',
+  //     },
+  //     {
+  //       title: 'Re-Registration',
+  //       link: '/admin/passport/modification',
+  //       icon: 'fas fa-user-circle',
+  //     },
+  //   ],
+  // },
 ];
 
 export default SidebarData;
