@@ -22,6 +22,11 @@ const SidebarData = [
         link: '/admin/nationalId/modification',
         icon: 'fas fa-user-circle',
       },
+      {
+        title: 'MFS Registration',
+        link: '/admin/nationalId/mfs-registration',
+        icon: 'fas fa-user-circle',
+      },
     ],
   },
   // {
