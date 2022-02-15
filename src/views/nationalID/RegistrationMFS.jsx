@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { useFormik } from 'formik';
 
 import ErrorMessage from '../../components/Forms/ErrorMessage';
 import validationSchema from '../../validation/niaModificationSchema';
 import { changeTitle } from '../../features/navbarSlice';
-import { toast } from 'react-toastify';
 
 function Modification() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.auth.value.user);
   const {
     handleSubmit,
     handleChange,
@@ -35,7 +36,7 @@ function Modification() {
     setLoading(true);
 
     const request = {
-      agentID: '560043149',
+      agentID: user.msisdn,
       msisdn: values.msisdn.toString(),
       nationalID: values.pinNumber,
       surname: values.surname,

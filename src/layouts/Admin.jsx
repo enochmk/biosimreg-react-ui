@@ -22,7 +22,7 @@ export default function Admin() {
   // user is not signed in
   useEffect(() => {
     if (!loggedIn) {
-      toast.error('You are not logged in. Please log in');
+      // toast.error('You are not logged in. Please log in');
       return navigate('/auth/login');
     }
   }, [loggedIn, navigate]);

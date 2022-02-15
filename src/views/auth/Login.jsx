@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -6,12 +7,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import loginSchema from '../../validation/loginSchema';
 import signInLogo from '../../assets/svg/sign_in_2.svg';
-import users from '../../data/Users';
 import { logUserIn } from '../../features/authSlice';
+
+const API_URL = 'http://localhost:5000/api';
 
 export default function Login() {
   const dispatch = useDispatch();
-
   const {
     register,
     handleSubmit,
@@ -22,21 +23,17 @@ export default function Login() {
 
   // handle form submit
   const onSubmit = async (data) => {
-    const { username, password } = data;
+    try {
+      // Find user in users array
+      const response = await axios.post(`${API_URL}/v1/auth/login`, {
+        ...data,
+      });
 
-    // Find user in users array
-    const user = users.find(
-      (user) =>
-        user.username.toLowerCase() === username.toLowerCase() &&
-        user.password === password,
-    );
-
-    if (!user) {
-      return toast.error('Invalid username or password');
+      // save to auth state
+      dispatch(logUserIn(response.data.data));
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
-
-    // save to auth state
-    dispatch(logUserIn(user));
   };
 
   return (

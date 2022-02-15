@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useFormik } from 'formik';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+import { useSelector } from 'react-redux';
 
 import ErrorMessage from '../../components/Forms/ErrorMessage';
 import niaRegistrationSchema from '../../validation/niaRegistrationSchema';
@@ -11,6 +12,7 @@ import { toast } from 'react-toastify';
 function Registration() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.auth.value.user);
   const {
     handleSubmit,
     handleChange,
@@ -35,7 +37,7 @@ function Registration() {
     setLoading(true);
 
     const request = {
-      agentID: '560043149',
+      agentID: user.msisdn,
       nationalID: values.pinNumber,
       surname: values.surname,
       msisdn: values.msisdn.toString(),

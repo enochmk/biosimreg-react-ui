@@ -16,7 +16,7 @@ function Auth() {
   // user is already signed in
   useEffect(() => {
     if (loggedIn) {
-      toast.error('You are already logged in');
+      // toast.error('You are already logged in');
       return navigate('/admin/dashboard');
     }
   }, [loggedIn, navigate]);
