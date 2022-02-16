@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import navbarReducer from './features/navbarSlice';
-import authReducer from './features/authSlice';
+import navbarReducer from '../features/navbar/navbarSlice';
+import authReducer from '../features/auth/authSlice';
 
 const store = configureStore({
   reducer: {

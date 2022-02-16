@@ -1,20 +1,17 @@
-import axios from 'axios';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import loginSchema from '../../validation/loginSchema';
 import signInLogo from '../../assets/svg/sign_in_2.svg';
-import { logUserIn } from '../../features/authSlice';
-
-const API_URL = 'http://localhost:5000/api';
+import { login } from '../../features/auth/authSlice';
 
 export default function Login() {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, isError, message } = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
@@ -23,22 +20,12 @@ export default function Login() {
     resolver: yupResolver(loginSchema),
   });
 
-  // handle form submit
-  const onSubmit = async (data) => {
-    setIsLoading(true);
-    try {
-      // Find user in users array
-      const response = await axios.post(`${API_URL}/v1/auth/login`, {
-        ...data,
-      });
+  useEffect(() => {
+    if (isError) return toast.error(message);
+  }, [isError, message]);
 
-      // save to auth state
-      dispatch(logUserIn(response.data.data));
-    } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = async ({ username, password }) => {
+    dispatch(login({ username, password }));
   };
 
   return (
@@ -99,7 +86,9 @@ export default function Login() {
                           type="submit"
                           className={
                             'btn btn-block btn-success ' +
-                            (isLoading ? 'loading disabled' : '')
+                            (isLoading
+                              ? 'loading btn-disabled btn-outline'
+                              : '')
                           }
                         >
                           Sign In

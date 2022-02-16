@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import Sidebar from '../components/Sidebars/Sidebar';
 import AdminNavbar from '../components/Navbars/AdminNavbar';
@@ -17,12 +16,10 @@ import PassportRegistration from '../views/passport/Registration';
 
 export default function Admin() {
   const navigate = useNavigate();
-  const loggedIn = useSelector((state) => state.auth.value.loggedIn);
+  const { loggedIn } = useSelector((state) => state.auth);
 
-  // user is not signed in
   useEffect(() => {
     if (!loggedIn) {
-      // toast.error('You are not logged in. Please log in');
       return navigate('/auth/login');
     }
   }, [loggedIn, navigate]);

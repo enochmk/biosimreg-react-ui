@@ -6,7 +6,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './assets/styles/index.css';
-import store from './store';
+import store from './app/store';
 import App from './App';
 
 ReactDOM.render(

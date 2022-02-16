@@ -6,13 +6,13 @@ import { useSelector } from 'react-redux';
 
 import ErrorMessage from '../../components/Forms/ErrorMessage';
 import niaRegistrationSchema from '../../validation/niaRegistrationSchema';
-import { changeTitle } from '../../features/navbarSlice';
+import { changeTitle } from '../../features/navbar/navbarSlice';
 import { toast } from 'react-toastify';
 
 function Registration() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const user = useSelector((state) => state.auth.value.user);
+  const user = useSelector((state) => state.auth.user);
   const {
     handleSubmit,
     handleChange,

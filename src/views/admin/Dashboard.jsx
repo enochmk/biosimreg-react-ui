@@ -5,7 +5,7 @@ import CardLineChart from '../../components/Cards/CardLineChart';
 import CardBarChart from '../../components/Cards/CardBarChart';
 import CardPageVisits from '../../components/Cards/CardPageVisits';
 import CardSocialTraffic from '../../components/Cards/CardSocialTraffic';
-import { changeTitle } from '../../features/navbarSlice';
+import { changeTitle } from '../../features/navbar/navbarSlice';
 
 export default function Dashboard() {
   const dispatch = useDispatch();

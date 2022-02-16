@@ -6,12 +6,12 @@ import { useFormik } from 'formik';
 
 import ErrorMessage from '../../components/Forms/ErrorMessage';
 import validationSchema from '../../validation/niaModificationSchema';
-import { changeTitle } from '../../features/navbarSlice';
+import { changeTitle } from '../../features/navbar/navbarSlice';
 
 function Modification() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const user = useSelector((state) => state.auth.value.user);
+  const user = useSelector((state) => state.auth.user);
   const {
     handleSubmit,
     handleChange,

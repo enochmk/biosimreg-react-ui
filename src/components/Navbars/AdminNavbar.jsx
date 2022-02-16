@@ -1,9 +1,10 @@
 import React from 'react';
-import UserDropdown from '../Dropdowns/UserDropdown';
 import { useSelector } from 'react-redux';
 
+import UserDropdown from '../Dropdowns/UserDropdown';
+
 export default function Navbar() {
-  const title = useSelector((state) => state.navbar.value);
+  const title = useSelector((state) => state.navbar.title);
 
   return (
     <>

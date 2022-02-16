@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { changeTitle } from '../../features/navbarSlice';
+import { changeTitle } from '../../features/navbar/navbarSlice';
 
 function Modification() {
   const dispatch = useDispatch();

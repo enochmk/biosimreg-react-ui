@@ -2,7 +2,7 @@ import { useState, createRef } from 'react';
 import { createPopper } from '@popperjs/core';
 import { useDispatch } from 'react-redux';
 
-import { logUserOut } from '../../features/authSlice';
+import { logout } from '../../features/auth/authSlice';
 import avatarImage from '../../assets/img/team-2-800x800.jpg';
 
 const UserDropdown = () => {
@@ -10,6 +10,7 @@ const UserDropdown = () => {
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
   const btnDropdownRef = createRef();
   const popoverDropdownRef = createRef();
+
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
       placement: 'bottom-start',
@@ -21,9 +22,7 @@ const UserDropdown = () => {
     setDropdownPopoverShow(false);
   };
 
-  const logOut = (e) => {
-    dispatch(logUserOut());
-  };
+  const handleLogout = () => dispatch(logout());
 
   return (
     <>
@@ -68,7 +67,7 @@ const UserDropdown = () => {
           className={
             'text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700'
           }
-          onClick={logOut}
+          onClick={handleLogout}
         >
           Logout
         </a>

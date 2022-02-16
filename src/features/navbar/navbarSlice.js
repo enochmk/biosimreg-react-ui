@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const INITIAL_STATE = {
-  value: 'Navbar',
+  title: 'Navbar',
 };
 
 export const navbarSlice = createSlice({
@@ -9,11 +9,13 @@ export const navbarSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     changeTitle: (state, action) => {
-      state.value = action.payload;
+      state.title = action.payload;
     },
   },
 });
 
+// actions
 export const { changeTitle } = navbarSlice.actions;
 
+// reducer
 export default navbarSlice.reducer;
