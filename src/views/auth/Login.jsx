@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
@@ -13,6 +14,7 @@ const API_URL = 'http://localhost:5000/api';
 
 export default function Login() {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,6 +25,7 @@ export default function Login() {
 
   // handle form submit
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       // Find user in users array
       const response = await axios.post(`${API_URL}/v1/auth/login`, {
@@ -32,7 +35,9 @@ export default function Login() {
       // save to auth state
       dispatch(logUserIn(response.data.data));
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,7 +97,10 @@ export default function Login() {
                       <div className="justify-center card-actions">
                         <button
                           type="submit"
-                          className="btn btn-block btn-success"
+                          className={
+                            'btn btn-block btn-success ' +
+                            (isLoading ? 'loading disabled' : '')
+                          }
                         >
                           Sign In
                         </button>
