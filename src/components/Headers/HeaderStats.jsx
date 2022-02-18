@@ -2,7 +2,7 @@ import React from 'react';
 
 import CardStats from '../Cards/CardStats';
 
-export default function HeaderStats() {
+export default function HeaderStats({ data }) {
   return (
     <>
       <div className="relative bg-blue-500 md:pt-32 pb-32 pt-12 w-full">
@@ -11,48 +11,48 @@ export default function HeaderStats() {
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="TRAFFIC"
-                  statTitle="350,897"
+                  statSubtitle="Total Linking"
+                  statTitle={data.total_linking_count}
                   statArrow="up"
-                  statPercent="3.48"
+                  statPercent=""
                   statPercentColor="text-emerald-500"
-                  statDescripiron="Since last month"
+                  statDescripiron="Since launch"
                   statIconName="far fa-chart-bar"
                   statIconColor="bg-red-500"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="NEW USERS"
-                  statTitle="2,356"
-                  statArrow="down"
-                  statPercent="3.48"
+                  statSubtitle="Total BCAP"
+                  statTitle={data.total_bcap_count}
+                  statArrow="up"
+                  statPercent=""
                   statPercentColor="text-red-500"
-                  statDescripiron="Since last week"
+                  statDescripiron="Since launch"
                   statIconName="fas fa-chart-pie"
                   statIconColor="bg-orange-500"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="SALES"
-                  statTitle="924"
-                  statArrow="down"
-                  statPercent="1.10"
+                  statSubtitle="Daily Linking"
+                  statTitle={data.daily_linking_count}
+                  statArrow="up"
+                  statPercent=""
                   statPercentColor="text-orange-500"
-                  statDescripiron="Since yesterday"
+                  statDescripiron="Today"
                   statIconName="fas fa-users"
                   statIconColor="bg-pink-500"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="PERFORMANCE"
-                  statTitle="49,65%"
+                  statSubtitle="Daily BCAP"
+                  statTitle={data.daily_bcap_count}
                   statArrow="up"
-                  statPercent="12"
+                  statPercent=""
                   statPercentColor="text-emerald-500"
-                  statDescripiron="Since last month"
+                  statDescripiron="today"
                   statIconName="fas fa-percent"
                   statIconColor="bg-blue-500"
                 />

@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
+import { getStats } from '../features/stats/statsSlice';
 import Sidebar from '../components/Sidebars/Sidebar';
 import AdminNavbar from '../components/Navbars/AdminNavbar';
 import HeaderStats from '../components/Headers/HeaderStats';
@@ -16,12 +17,16 @@ import PassportRegistration from '../views/passport/Registration';
 
 export default function Admin() {
   const navigate = useNavigate();
-  const { loggedIn } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { loggedIn, user } = useSelector((state) => state.auth);
+  const { personalStats } = useSelector((state) => state.stats);
 
   useEffect(() => {
     if (!loggedIn) {
       return navigate('/auth/login');
     }
+
+    dispatch(getStats(user));
   }, [loggedIn, navigate]);
 
   return (
@@ -29,7 +34,7 @@ export default function Admin() {
       <Sidebar title="AirtelTigo BIOSIMREG v2" />
       <main className="relative md:ml-64">
         <AdminNavbar />
-        <HeaderStats />
+        <HeaderStats data={personalStats.stats} />
         <div className="px-4 md:px-10 mx-auto w-full m-24">
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
