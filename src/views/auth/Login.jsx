@@ -9,7 +9,7 @@ import loginSchema from '../../validation/loginSchema';
 import signInLogo from '../../assets/svg/sign_in_2.svg';
 import { login } from '../../features/auth/authSlice';
 
-export default function Login() {
+function Login() {
   const dispatch = useDispatch();
   const { isLoading, isError, message } = useSelector((state) => state.auth);
   const {
@@ -72,6 +72,7 @@ export default function Login() {
                           type="password"
                           placeholder="Password"
                           {...register('password')}
+                          autoComplete="off"
                           className="input input-bordered shadow focus:ring "
                         />
                         {
@@ -114,3 +115,5 @@ export default function Login() {
     </section>
   );
 }
+
+export default Login;

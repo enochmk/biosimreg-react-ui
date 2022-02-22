@@ -14,8 +14,7 @@ import NiaRegistration from '../views/nationalID/Registration';
 import NiaRegistrationMfs from '../views/nationalID/RegistrationMFS';
 import PassportModification from '../views/passport/Modification';
 import PassportRegistration from '../views/passport/Registration';
-
-export default function Admin() {
+function Admin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loggedIn, user } = useSelector((state) => state.auth);
@@ -69,3 +68,5 @@ export default function Admin() {
     </>
   );
 }
+
+export default Admin;

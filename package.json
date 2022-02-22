@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "author": "Enoch Klufio",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://0.0.0.0:5000",
   "description": "React version of Biometric Sim Registration Applicaton for AirtelTigo",
   "engines": {
     "node": "14 || 15 || 16",
