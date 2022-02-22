@@ -12,7 +12,9 @@ export default function HeaderStats({ data }) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Total Linking"
-                  statTitle={data.total_linking_count}
+                  statTitle={
+                    data?.linking?.total_linking_count.toString() || '0'
+                  }
                   statArrow="up"
                   statPercent=""
                   statPercentColor="text-emerald-500"
@@ -24,7 +26,7 @@ export default function HeaderStats({ data }) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Total BCAP"
-                  statTitle={data.total_bcap_count}
+                  statTitle={data?.linking?.total_bcap_count.toString() || '0'}
                   statArrow="up"
                   statPercent=""
                   statPercentColor="text-red-500"
@@ -36,7 +38,9 @@ export default function HeaderStats({ data }) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Daily Linking"
-                  statTitle={data.daily_linking_count}
+                  statTitle={
+                    data?.linking?.daily_linking_count.toString() || '0'
+                  }
                   statArrow="up"
                   statPercent=""
                   statPercentColor="text-orange-500"
@@ -48,7 +52,7 @@ export default function HeaderStats({ data }) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Daily BCAP"
-                  statTitle={data.daily_bcap_count}
+                  statTitle={data?.linking?.daily_bcap_count.toString() || '0'}
                   statArrow="up"
                   statPercent=""
                   statPercentColor="text-emerald-500"

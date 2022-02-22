@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import { getStats } from '../features/stats/statsSlice';
+import { getStatistics } from '../features/stats/statsSlice';
 import Sidebar from '../components/Sidebars/Sidebar';
 import AdminNavbar from '../components/Navbars/AdminNavbar';
 import HeaderStats from '../components/Headers/HeaderStats';
@@ -18,15 +18,13 @@ import PassportRegistration from '../views/passport/Registration';
 function Admin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoggedIn, user } = useSelector((state) => state.auth);
-  const { personalStats } = useSelector((state) => state.stats);
+  const { isLoggedIn, accessToken } = useSelector((state) => state.auth);
+  const statistics = useSelector((state) => state.statistics.data);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      return navigate('/auth/login');
-    }
+    if (!isLoggedIn) return navigate('/auth/login');
 
-    // dispatch(getStats(user));
+    dispatch(getStatistics(accessToken));
   }, [isLoggedIn, navigate]);
 
   return (
@@ -34,7 +32,7 @@ function Admin() {
       <Sidebar title="AirtelTigo BIOSIMREG v2" />
       <main className="relative md:ml-64">
         <AdminNavbar />
-        {/* <HeaderStats data={personalStats.stats} /> */}
+        <HeaderStats data={statistics} />
         <div className="px-4 md:px-10 mx-auto w-full m-24">
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />

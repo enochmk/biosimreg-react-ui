@@ -8,7 +8,7 @@ const store = configureStore({
   reducer: {
     navbar: navbarReducer,
     auth: authReducer,
-    stats: statsReducer,
+    statistics: statsReducer,
   },
 });
 

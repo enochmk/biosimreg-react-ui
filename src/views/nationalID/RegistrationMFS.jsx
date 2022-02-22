@@ -233,7 +233,7 @@ function Modification() {
                     onBlur={handleBlur}
                     className="select select-bordered select-info w-full max-w-xs"
                   >
-                    <option value="" disabled="disabled" selected="selected">
+                    <option value="" disabled="disabled" defaultValue>
                       Select Gender
                     </option>
                     <option value="MALE" label="Male" />
