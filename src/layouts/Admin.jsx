@@ -14,26 +14,27 @@ import NiaRegistration from '../views/nationalID/Registration';
 import NiaRegistrationMfs from '../views/nationalID/RegistrationMFS';
 import PassportModification from '../views/passport/Modification';
 import PassportRegistration from '../views/passport/Registration';
+
 function Admin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loggedIn, user } = useSelector((state) => state.auth);
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
   const { personalStats } = useSelector((state) => state.stats);
 
   useEffect(() => {
-    if (!loggedIn) {
+    if (!isLoggedIn) {
       return navigate('/auth/login');
     }
 
-    dispatch(getStats(user));
-  }, [loggedIn, navigate]);
+    // dispatch(getStats(user));
+  }, [isLoggedIn, navigate]);
 
   return (
     <>
       <Sidebar title="AirtelTigo BIOSIMREG v2" />
       <main className="relative md:ml-64">
         <AdminNavbar />
-        <HeaderStats data={personalStats.stats} />
+        {/* <HeaderStats data={personalStats.stats} /> */}
         <div className="px-4 md:px-10 mx-auto w-full m-24">
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />

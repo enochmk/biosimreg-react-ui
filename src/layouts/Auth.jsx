@@ -11,15 +11,15 @@ import backgroundImage from '../assets/img/register_bg_2.png';
 
 function Auth() {
   const navigate = useNavigate();
-  const loggedIn = useSelector((state) => state.auth.loggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   // user is already signed in
   useEffect(() => {
-    if (loggedIn) {
+    if (isLoggedIn) {
       // toast.error('You are already logged in');
       return navigate('/admin/dashboard');
     }
-  }, [loggedIn, navigate]);
+  }, [isLoggedIn, navigate]);
 
   return (
     <>

@@ -6,7 +6,8 @@ const user = JSON.parse(localStorage.getItem('user'));
 
 const INITIAL_STATE = {
   user: user ? user : null,
-  loggedIn: user ? true : false,
+  accessToken: null,
+  isLoggedIn: user ? true : false,
   isLoading: false,
   isError: false,
   message: '',
@@ -16,10 +17,18 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
   const { username, password } = user;
 
   try {
-    return await authService.loginWithUsernameAndPassword({
+    // get the access Token
+    const loginResponse = await authService.loginWithUsernameAndPassword({
       username,
       password,
     });
+    const accessToken = loginResponse.accessToken;
+
+    // get user details using the accessToken
+    const profileResponse = await authService.getUserProfile({ accessToken });
+    const user = profileResponse.user;
+
+    return { accessToken, user };
   } catch (error) {
     const message =
       error.response?.data?.message || error.message || error.toString();
@@ -42,7 +51,8 @@ export const authSlice = createSlice({
     signOut: (state) => {
       localStorage.removeItem('user');
       state.user = null;
-      state.loggedIn = false;
+      state.accessToken = null;
+      state.isLoggedIn = false;
     },
     reset: (state) => {
       state.isLoading = false;
@@ -59,20 +69,24 @@ export const authSlice = createSlice({
         state.user = null;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.loggedIn = true;
+        state.accessToken = action.payload.accessToken;
+        state.user = action.payload.user;
+        state.isLoggedIn = true;
         state.isLoading = false;
         state.message = '';
       })
       .addCase(login.rejected, (state, action) => {
         state.user = null;
+        state.accessToken = null;
         state.isLoading = false;
+        state.isLoggedIn = false;
         state.isError = true;
         state.message = action.payload;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
-        state.loggedIn = false;
+        state.accessToken = null;
+        state.isLoggedIn = false;
       });
   },
 });
