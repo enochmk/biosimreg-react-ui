@@ -8,14 +8,18 @@ const useRefreshToken = () => {
   const dispatch = useDispatch();
 
   const refresh = async () => {
-    const response = await axios.get('/auth/refresh', {
-      withCredentials: true,
-    });
+    try {
+      const response = await axios.get('/auth/refresh', {
+        withCredentials: true,
+      });
 
-    // ? update access token
-    dispatch(updateAccessToken(response.data.accessToken));
+      // ? update access token
+      dispatch(updateAccessToken(response.data.accessToken));
 
-    return response.data.accessToken;
+      return response.data.accessToken;
+    } catch (error) {
+      throw new Error(error.response?.data?.message || error.message);
+    }
   };
 
   return refresh;
