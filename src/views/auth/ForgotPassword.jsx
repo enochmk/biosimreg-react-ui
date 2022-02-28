@@ -75,7 +75,7 @@ function ForgotPassword() {
               </div>
             </div>
           </div>
-          <p class="text-center text-xs mt-4">
+          <p className="text-center text-xs mt-4">
             &copy;2022 Solutions Team. All rights reserved.
           </p>
         </div>

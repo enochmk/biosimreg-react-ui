@@ -1,4 +1,4 @@
-const SidebarData = [
+const routes = [
   {
     title: 'Admin Section',
     data: [
@@ -14,17 +14,17 @@ const SidebarData = [
     data: [
       {
         title: 'Registration',
-        link: '/admin/nationalId/registration',
+        link: '/admin/registration',
         icon: 'fas fa-newspaper',
       },
       {
         title: 'Re-Registration',
-        link: '/admin/nationalId/modification',
+        link: '/admin/modification',
         icon: 'fas fa-user-circle',
       },
       {
         title: 'MFS Registration',
-        link: '/admin/nationalId/mfs-registration',
+        link: '/admin/mfs-registration',
         icon: 'fas fa-user-circle',
       },
     ],
@@ -46,4 +46,4 @@ const SidebarData = [
   // },
 ];
 
-export default SidebarData;
+export default routes;

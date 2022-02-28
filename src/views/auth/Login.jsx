@@ -9,7 +9,7 @@ import loginSchema from '../../validation/loginSchema';
 import signInLogo from '../../assets/svg/sign_in_2.svg';
 import { login } from '../../features/auth/authSlice';
 
-function Login() {
+const Login = () => {
   const dispatch = useDispatch();
   const { isLoading, isError, message } = useSelector((state) => state.auth);
   const {
@@ -114,6 +114,6 @@ function Login() {
       </div>
     </section>
   );
-}
+};
 
 export default Login;

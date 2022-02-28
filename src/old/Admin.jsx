@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { updateStats } from '../features/stats/statsSlice';
@@ -18,39 +18,27 @@ import NiaRegistrationMfs from '../views/nationalID/RegistrationMFS';
 import PassportModification from '../views/passport/Modification';
 import PassportRegistration from '../views/passport/Registration';
 
-function Admin() {
-  const navigate = useNavigate();
+const Admin = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const axiosPrivate = useAxiosPrivate();
   const { isLoggedIn } = useSelector((state) => state.auth);
   const statistics = useSelector((state) => state.statistics.data);
 
-  // ! not logged in, redirect to login
-  useEffect(() => {
-    if (!isLoggedIn)
-      return navigate(
-        '/auth/login',
-        { state: { from: location } },
-        { replace: true },
-      );
-  }, [isLoggedIn, navigate, location]);
+  // // update stats
+  // useEffect(() => {
+  //   const getStatistics = async () => {
+  //     try {
+  //       const response = await axiosPrivate.get('/profile/stats');
+  //       dispatch(updateStats(response.data));
+  //     } catch (error) {
+  //       let message = error.response?.data?.message || error.message;
+  //       toast.error(message);
+  //       dispatch(logout());
+  //     }
+  //   };
 
-  // update stats
-  useEffect(() => {
-    const getStatistics = async () => {
-      try {
-        const response = await axiosPrivate.get('/profile/stats');
-        dispatch(updateStats(response.data));
-      } catch (error) {
-        let message = error.response?.data?.message || error.message;
-        toast.error(message);
-        dispatch(logout());
-      }
-    };
-
-    getStatistics();
-  }, [isLoggedIn, navigate, dispatch, axiosPrivate]);
+  //   getStatistics();
+  // }, [isLoggedIn, dispatch, axiosPrivate]);
 
   return (
     <>
@@ -91,6 +79,6 @@ function Admin() {
       </main>
     </>
   );
-}
+};
 
 export default Admin;

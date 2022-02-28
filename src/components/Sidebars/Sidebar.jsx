@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import SidebarData from '../../data/SidebarData';
+import routes from '../../routes';
 import SidebarItem from './SidebarItem';
 
 export default function Sidebar({ title }) {
@@ -16,7 +16,7 @@ export default function Sidebar({ title }) {
           </Link>
 
           <div className="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded">
-            {SidebarData.map((item, index) => (
+            {routes.map((item, index) => (
               <SidebarItem key={index} title={item.title} data={item.data} />
             ))}
           </div>
