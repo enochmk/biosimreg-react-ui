@@ -1,6 +1,12 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 // import { toast } from 'react-toastify';
 
 import FooterSmall from '../components/Footers/FooterSmall';
@@ -11,15 +17,16 @@ import backgroundImage from '../assets/img/register_bg_2.png';
 
 function Auth() {
   const navigate = useNavigate();
+  const location = useLocation();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  // user is already signed in
   useEffect(() => {
-    if (isLoggedIn) {
-      // toast.error('You are already logged in');
-      return navigate('/admin/dashboard');
-    }
-  }, [isLoggedIn, navigate]);
+    const from = location.state
+      ? location.state?.from
+      : { pathname: '/admin/dashboard' };
+
+    if (isLoggedIn) return navigate(from, { replace: true });
+  }, [isLoggedIn, navigate, location]);
 
   return (
     <>
