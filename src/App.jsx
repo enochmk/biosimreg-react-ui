@@ -12,15 +12,13 @@ import Dashboard from './views/admin/Dashboard';
 import NiaRegistration from './views/nationalID/Registration';
 import NiaModification from './views/nationalID/Modification';
 import NiaRegistrationMfs from './views/nationalID/RegistrationMFS';
-import NotFound from './views/notFound/NotFound';
+import NotFound from './views/others/NotFound';
+import Unauthorized from './views/others/Unauthorized';
 
 const App = () => {
   return (
     <>
       <Routes>
-        {/* public routes */}
-        <Route path="/notfound" element={<NotFound />} />
-
         {/* User not logged  */}
         <Route path="auth" element={<AuthLayout />}>
           <Route path="login" element={<Login />} />
@@ -33,9 +31,11 @@ const App = () => {
           <Route path="registration" element={<NiaRegistration />} />
           <Route path="mfs-registration" element={<NiaRegistrationMfs />} />
           <Route path="modification" element={<NiaModification />} />
+          <Route path="unauthorized" element={<Unauthorized />} />
         </Route>
 
         {/* catch all */}
+        <Route path="/notfound" element={<NotFound />} />
         <Route path="/" element={<Navigate to="/admin/dashboard" />} />
         <Route path="*" element={<Navigate from="*" to="/notfound" />} />
       </Routes>
