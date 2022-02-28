@@ -7,7 +7,7 @@ import CardPageVisits from '../../components/Cards/CardPageVisits';
 import CardSocialTraffic from '../../components/Cards/CardSocialTraffic';
 import { changeTitle } from '../../features/navbar/navbarSlice';
 
-function Dashboard() {
+const Dashboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,6 +35,6 @@ function Dashboard() {
       </div>
     </>
   );
-}
+};
 
 export default Dashboard;

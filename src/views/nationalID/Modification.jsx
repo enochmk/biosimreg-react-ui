@@ -8,7 +8,7 @@ import ErrorMessage from '../../components/Forms/ErrorMessage';
 import validationSchema from '../../validation/niaModificationSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
 
-function Modification() {
+const Modification = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [loading, setLoading] = useState(false);
@@ -233,7 +233,7 @@ function Modification() {
       <div className="w-full lg:w-4/12 px-4"></div>
     </div>
   );
-}
+};
 
 const INITIAL_VALUES = {
   msisdn: '',

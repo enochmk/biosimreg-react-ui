@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import forgotPasswordLogo from '../../assets/svg/forgot_password.svg';
 import changePasswordSchema from '../../validation/changePasswordSchema';
 
-function ForgotPassword() {
+const ForgotPassword = () => {
   const {
     register,
     handleSubmit,
@@ -82,6 +82,6 @@ function ForgotPassword() {
       </div>
     </section>
   );
-}
+};
 
 export default ForgotPassword;

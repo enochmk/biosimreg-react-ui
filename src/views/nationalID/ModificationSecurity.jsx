@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { changeTitle } from '../../features/navbar/navbarSlice';
 
-function SecurityModification() {
+const SecurityModification = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -11,6 +11,6 @@ function SecurityModification() {
   }, []);
 
   return <h2>SecurityModification</h2>;
-}
+};
 
 export default SecurityModification;

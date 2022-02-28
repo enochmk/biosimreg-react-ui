@@ -9,7 +9,7 @@ import niaRegistrationSchema from '../../validation/niaRegistrationSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
 import { toast } from 'react-toastify';
 
-function Registration() {
+const Registration = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.auth.user);
@@ -237,7 +237,7 @@ function Registration() {
       <div className="w-full lg:w-4/12 px-4"></div>
     </div>
   );
-}
+};
 
 const INITIAL_VALUES = {
   pinNumber: '',
