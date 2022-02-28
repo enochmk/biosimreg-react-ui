@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { axiosPrivate } from '../customs/axios';
 import useRefreshToken from './useRefreshToken';
 
+// @desc: attach interceptors to axiosPrivate
 const useAxiosPrivate = () => {
   const accessToken = useSelector((state) => state.auth.accessToken);
   const refresh = useRefreshToken();
@@ -33,7 +34,6 @@ const useAxiosPrivate = () => {
           prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
           return axiosPrivate(prevRequest);
         }
-
         return Promise.reject(error);
       },
     );
