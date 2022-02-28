@@ -33,6 +33,9 @@ export const statsSlice = createSlice({
       state.isError = '';
       state.message = '';
     },
+    updateStats: (state, action) => {
+      state.data = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -58,7 +61,7 @@ export const statsSlice = createSlice({
 });
 
 // actions
-export const { reset } = statsSlice.actions;
+export const { reset, updateStats } = statsSlice.actions;
 
 // Reducer
 export default statsSlice.reducer;

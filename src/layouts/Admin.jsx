@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import { getStatistics } from '../features/stats/statsSlice';
+import { updateStats } from '../features/stats/statsSlice';
+import { logout } from '../features/auth/authSlice';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import Sidebar from '../components/Sidebars/Sidebar';
 import AdminNavbar from '../components/Navbars/AdminNavbar';
 import HeaderStats from '../components/Headers/HeaderStats';
@@ -18,18 +21,40 @@ import PassportRegistration from '../views/passport/Registration';
 function Admin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoggedIn, accessToken } = useSelector((state) => state.auth);
+  const location = useLocation();
+  const axiosPrivate = useAxiosPrivate();
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const statistics = useSelector((state) => state.statistics.data);
 
+  // ! not logged in, redirect to login
   useEffect(() => {
-    if (!isLoggedIn) return navigate('/auth/login');
+    if (!isLoggedIn)
+      return navigate(
+        '/auth/login',
+        { state: { from: location } },
+        { replace: true },
+      );
+  }, [isLoggedIn, navigate, location]);
 
-    dispatch(getStatistics(accessToken));
-  }, [isLoggedIn, navigate]);
+  // update stats
+  useEffect(() => {
+    const getStatistics = async () => {
+      try {
+        const response = await axiosPrivate.get('/profile/stats');
+        dispatch(updateStats(response.data));
+      } catch (error) {
+        let message = error.response?.data?.message || error.message;
+        toast.error(message);
+        dispatch(logout());
+      }
+    };
+
+    getStatistics();
+  }, [isLoggedIn, navigate, dispatch, axiosPrivate]);
 
   return (
     <>
-      <Sidebar title="AirtelTigo BIOSIMREG v2" />
+      <Sidebar title="AirtelTigo BIOSIMREG" />
       <main className="relative md:ml-64">
         <AdminNavbar />
         <HeaderStats data={statistics} />
