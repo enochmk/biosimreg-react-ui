@@ -1,11 +1,8 @@
-import axios from 'axios';
-
-const SERVER_URL = 'http://localhost:5000/api/v1';
+import axios from '../../customs/axios';
 
 // login user
 export const loginWithUsernameAndPassword = async ({ username, password }) => {
-  const API_URL = SERVER_URL + '/auth/login';
-  const response = await axios.post(API_URL, { username, password });
+  const response = await axios.post('/auth/login', { username, password });
 
   // set data to localStorage
   if (response.data) {
@@ -17,8 +14,7 @@ export const loginWithUsernameAndPassword = async ({ username, password }) => {
 
 // get profile details
 export const getUserProfile = async ({ accessToken }) => {
-  const API_URL = SERVER_URL + '/profile';
-  const response = await axios.get(API_URL, {
+  const response = await axios.get('/profile', {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -30,4 +26,5 @@ export const getUserProfile = async ({ accessToken }) => {
 // logout user
 export const logout = async () => {
   localStorage.removeItem('user');
+  await axios.post('/auth/logout');
 };
