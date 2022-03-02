@@ -22,7 +22,7 @@ const HeaderStats = () => {
         <article className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total Linking"
-            statTitle={data?.linking?.total_linking_count.toString() || '0'}
+            statTitle={data?.linking?.total_linking_count.toString() || 'N/A'}
             statArrow="up"
             statPercent=""
             statPercentColor="text-emerald-500"
@@ -34,7 +34,7 @@ const HeaderStats = () => {
         <article className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total BCAP"
-            statTitle={data?.linking?.total_bcap_count.toString() || '0'}
+            statTitle={data?.linking?.total_bcap_count.toString() || 'N/A'}
             statArrow="up"
             statPercent=""
             statPercentColor="text-red-500"
@@ -46,7 +46,7 @@ const HeaderStats = () => {
         <article className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Daily Linking"
-            statTitle={data?.linking?.daily_linking_count.toString() || '0'}
+            statTitle={data?.linking?.daily_linking_count.toString() || 'N/A'}
             statArrow="up"
             statPercent=""
             statPercentColor="text-orange-500"
@@ -58,7 +58,7 @@ const HeaderStats = () => {
         <article className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Daily BCAP"
-            statTitle={data?.linking?.daily_bcap_count.toString() || '0'}
+            statTitle={data?.linking?.daily_bcap_count.toString() || 'N/A'}
             statArrow="up"
             statPercent=""
             statPercentColor="text-emerald-500"
