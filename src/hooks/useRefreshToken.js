@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import axios from '../customs/axios';
 import { updateAccessToken } from '../features/auth/authSlice';
 
-// @desc Use request with cookie to refresh accessToken
+// @desc Use cookie to refresh accessToken
 const useRefreshToken = () => {
   const dispatch = useDispatch();
 

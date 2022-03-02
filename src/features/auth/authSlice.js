@@ -18,23 +18,44 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 
   try {
     // get the access Token
-    const loginResponse = await authService.loginWithUsernameAndPassword({
+    const { accessToken } = await authService.loginWithUsernameAndPassword({
       username,
       password,
     });
-    const accessToken = loginResponse.accessToken;
 
-    // get user details using the accessToken
-    const profileResponse = await authService.getUserProfile({ accessToken });
-    const user = profileResponse.user;
+    // get the user profile
+    thunkAPI.dispatch(updateUserProfile({ accessToken: accessToken }));
 
-    return { accessToken, user };
+    return { accessToken: accessToken };
   } catch (error) {
     const message =
       error.response?.data?.message || error.message || error.toString();
+
     return thunkAPI.rejectWithValue(message);
   }
 });
+
+export const updateUserProfile = createAsyncThunk(
+  'profile/user',
+  async (data, thunkAPI) => {
+    const { accessToken } = data;
+
+    try {
+      // get user details using the accessToken
+      const profileResponse = await authService.updateUserProfile({
+        accessToken,
+      });
+
+      const user = profileResponse.user;
+
+      return { user };
+    } catch (error) {
+      const message =
+        error.response?.data?.message || error.message || error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  },
+);
 
 export const logout = createAsyncThunk(
   'auth/logout',
@@ -73,7 +94,7 @@ export const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.accessToken = action.payload.accessToken;
-        state.user = action.payload.user;
+        // state.user = action.payload.user;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.message = '';
@@ -90,6 +111,27 @@ export const authSlice = createSlice({
         state.user = null;
         state.accessToken = null;
         state.isLoggedIn = false;
+      })
+      .addCase(updateUserProfile.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.message = '';
+        state.user = null;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        // state.accessToken = action.payload.accessToken;
+        state.user = action.payload.user;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.message = '';
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        state.user = null;
+        state.accessToken = null;
+        state.isLoading = false;
+        state.isLoggedIn = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });

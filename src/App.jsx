@@ -14,24 +14,29 @@ import NiaModification from './views/nationalID/Modification';
 import NiaRegistrationMfs from './views/nationalID/RegistrationMFS';
 import NotFound from './views/others/NotFound';
 import Unauthorized from './views/others/Unauthorized';
+import PersistLogin from './components/Others/PersistLogin';
 
 const App = () => {
   return (
     <>
       <Routes>
         {/* User not logged  */}
-        <Route path="auth" element={<AuthLayout />}>
-          <Route path="login" element={<Login />} />
-          <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route element={<PersistLogin />}>
+          <Route path="auth" element={<AuthLayout />}>
+            <Route path="login" element={<Login />} />
+            <Route path="forgot-password" element={<ForgotPassword />} />
+          </Route>
         </Route>
 
         {/* Private Routes: User should be logged in  */}
-        <Route path="admin" element={<AdminLayout />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="registration" element={<NiaRegistration />} />
-          <Route path="mfs-registration" element={<NiaRegistrationMfs />} />
-          <Route path="modification" element={<NiaModification />} />
-          <Route path="unauthorized" element={<Unauthorized />} />
+        <Route element={<PersistLogin />}>
+          <Route path="admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="registration" element={<NiaRegistration />} />
+            <Route path="mfs-registration" element={<NiaRegistrationMfs />} />
+            <Route path="modification" element={<NiaModification />} />
+            <Route path="unauthorized" element={<Unauthorized />} />
+          </Route>
         </Route>
 
         {/* catch all */}
