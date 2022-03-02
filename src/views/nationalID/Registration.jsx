@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
@@ -8,6 +7,7 @@ import ErrorMessage from '../../components/Forms/ErrorMessage';
 import niaRegistrationSchema from '../../validation/niaRegistrationSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
 import { toast } from 'react-toastify';
+import * as nationalIdService from '../../services/nationalIdService';
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -30,37 +30,17 @@ const Registration = () => {
 
   useEffect(() => {
     dispatch(changeTitle('NIA Registration'));
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, []);
+  }, [dispatch]);
 
   const onSubmit = async (values) => {
     setLoading(true);
 
-    const request = {
-      agentID: user.msisdn,
-      nationalID: values.pinNumber,
-      surname: values.surname,
-      msisdn: values.msisdn.toString(),
-      iccid: values.iccid.toString(),
-      alternativeNumber: values.alternativeNumber.toString(),
-      nextOfKin: values.nextOfKin,
-      isMFS: true,
-      forenames: '',
-      gender: '',
-      dateOfBirth: null,
-      channelID: 'web',
-    };
-
     try {
-      const response = await axios.post(
-        'http://10.81.1.188:5002/v1/nonbiometric/registration',
-        request,
-      );
-
-      toast.success(response.data.message);
+      const response = await nationalIdService.registration(user, values);
+      toast.success(response.message);
       handleReset();
     } catch (error) {
-      toast.error(error.response.data.message || error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -80,7 +60,7 @@ const Registration = () => {
               <div className="flex flex-row  gap-x-3">
                 <div className="form-control flex-1">
                   <label className="label">
-                    <span className="label-text">Ghana Card</span>
+                    <span className="label-text">Pin Number</span>
                   </label>
                   <input
                     type="text"

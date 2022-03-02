@@ -3,14 +3,14 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1);
+    navigate('/admin/dashboard');
   };
 
   return (
     <div className="mx-auto">
       <h2 className="display-1">Not Found Component</h2>
       <button onClick={handleGoBack} className="btn btn-outline">
-        Go Back
+        Back Home
       </button>
     </div>
   );

@@ -10,7 +10,7 @@ import Login from './views/auth/Login';
 import ForgotPassword from './views/auth/ForgotPassword';
 import Dashboard from './views/admin/Dashboard';
 import NiaRegistration from './views/nationalID/Registration';
-import NiaModification from './views/nationalID/Modification';
+import NiaReRegistration from './views/nationalID/ReRegistration';
 import NiaRegistrationMfs from './views/nationalID/RegistrationMFS';
 import NotFound from './views/others/NotFound';
 import Unauthorized from './views/others/Unauthorized';
@@ -33,8 +33,8 @@ const App = () => {
           <Route path="admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="registration" element={<NiaRegistration />} />
+            <Route path="re-registration" element={<NiaReRegistration />} />
             <Route path="mfs-registration" element={<NiaRegistrationMfs />} />
-            <Route path="modification" element={<NiaModification />} />
             <Route path="unauthorized" element={<Unauthorized />} />
           </Route>
         </Route>

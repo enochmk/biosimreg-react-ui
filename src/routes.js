@@ -19,7 +19,7 @@ const routes = [
       },
       {
         title: 'Re-Registration',
-        link: '/admin/modification',
+        link: '/admin/re-registration',
         icon: 'fas fa-user-circle',
       },
       {

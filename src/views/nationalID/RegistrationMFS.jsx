@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -7,6 +6,7 @@ import { useFormik } from 'formik';
 import ErrorMessage from '../../components/Forms/ErrorMessage';
 import validationSchema from '../../validation/niaModificationSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
+import * as nationalIdService from '../../services/nationalIdService';
 
 const Modification = () => {
   const dispatch = useDispatch();
@@ -29,35 +29,17 @@ const Modification = () => {
 
   useEffect(() => {
     dispatch(changeTitle('NIA MFS-Registration'));
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, []);
+  }, [dispatch]);
 
   const onSubmit = async (values) => {
     setLoading(true);
 
-    const request = {
-      agentID: user.msisdn,
-      msisdn: values.msisdn.toString(),
-      nationalID: values.pinNumber,
-      surname: values.surname,
-      forenames: values.forenames,
-      gender: values.gender,
-      dateOfBirth: values.dateOfBirth,
-      nextOfKin: values.nextOfKin,
-      channelID: 'web',
-      cellID: null,
-    };
-
     try {
-      const response = await axios.post(
-        'http://10.81.1.188:5002/v1/nonbiometric/registrationMfs',
-        request,
-      );
-
-      toast.success(response.data.message);
+      const response = await nationalIdService.registrationMFS(user, values);
+      toast.success(response.message);
       handleReset();
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -77,7 +59,7 @@ const Modification = () => {
               <div className="flex flex-row  gap-x-3">
                 <div className="form-control flex-1">
                   <label className="label">
-                    <span className="label-text">Ghana Card</span>
+                    <span className="label-text">Pin Number</span>
                   </label>
                   <input
                     type="text"
@@ -147,7 +129,7 @@ const Modification = () => {
               <div className="flex flex-row gap-x-3">
                 <div className="form-control flex-1">
                   <label className="label">
-                    <span className="label-text">forenames</span>
+                    <span className="label-text">Forenames</span>
                   </label>
                   <input
                     type="text"
@@ -155,7 +137,7 @@ const Modification = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.forenames}
-                    placeholder="789345"
+                    placeholder="ENOCH MENSAH"
                     className={
                       'input input-info input-bordered' +
                       (errors.forenames && values.forenames
@@ -245,7 +227,7 @@ const Modification = () => {
 
                 <div className="form-control flex-1">
                   <label className="label">
-                    <span className="label-text">Birthday</span>
+                    <span className="label-text">Date Of Birth</span>
                   </label>
                   <input
                     type="text"
@@ -253,7 +235,7 @@ const Modification = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.dateOfBirth}
-                    placeholder="John Smith"
+                    placeholder="27041994"
                     className={
                       'input input-info input-bordered' +
                       (errors.dateOfBirth && values.dateOfBirth
@@ -297,7 +279,6 @@ const INITIAL_VALUES = {
   dateOfBirth: '',
   gender: '',
   nextOfKin: '',
-  gender: '',
 };
 
 export default Modification;

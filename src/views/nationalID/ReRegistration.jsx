@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -7,6 +6,7 @@ import { useFormik } from 'formik';
 import ErrorMessage from '../../components/Forms/ErrorMessage';
 import validationSchema from '../../validation/niaModificationSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
+import * as nationalIdService from '../../services/nationalIdService';
 
 const Modification = () => {
   const dispatch = useDispatch();
@@ -28,34 +28,18 @@ const Modification = () => {
   });
 
   useEffect(() => {
-    dispatch(changeTitle('NIA Modification'));
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, []);
+    dispatch(changeTitle('NIA Re-Registration'));
+  }, [dispatch]);
 
   const onSubmit = async (values) => {
     setLoading(true);
 
-    const request = {
-      agentID: user.msisdn,
-      msisdn: values.msisdn.toString(),
-      nationalID: values.pinNumber,
-      surname: values.surname,
-      forenames: values.forenames,
-      dateOfBirth: values.dateOfBirth,
-      gender: values.gender,
-      channelID: 'web',
-    };
-
     try {
-      const response = await axios.post(
-        'http://10.81.1.188:5002/v1/nonbiometric/reRegistrationBasic',
-        request,
-      );
-
-      toast.success(response.data.message);
+      const response = await nationalIdService.reRegistration(user, values);
+      toast.success(response.message);
       handleReset();
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -75,7 +59,7 @@ const Modification = () => {
               <div className="flex flex-row gap-x-3">
                 <div className="form-control flex-1">
                   <label className="label">
-                    <span className="label-text">Ghana Card</span>
+                    <span className="label-text">Pin Number</span>
                   </label>
                   <input
                     type="text"
@@ -178,7 +162,7 @@ const Modification = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.dateOfBirth}
-                    placeholder="John Smith"
+                    placeholder="01011990"
                     className={
                       'input input-info input-bordered' +
                       (errors.dateOfBirth && values.dateOfBirth
