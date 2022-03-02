@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/enochmk/biosimreg-react-ui/compare/v0.1.1...v0.1.2) (2022-03-02)
+
+
+### Features
+
+* automatically refresh access token ([4378d35](https://github.com/enochmk/biosimreg-react-ui/commit/4378d351e895e717fbf0546d33feb5b21b7c8354))
+* persist user login ([9678a1e](https://github.com/enochmk/biosimreg-react-ui/commit/9678a1e8401f42d284c8d6807b00f5374cb85c9e))
+
 ### 0.1.1 (2022-02-22)
 
 
