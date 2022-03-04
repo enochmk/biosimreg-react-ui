@@ -4,11 +4,21 @@ import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 
 import ErrorMessage from '../../components/Forms/ErrorMessage';
-import validationSchema from '../../validation/niaModificationSchema';
+import { registrationMFSSchema as validationSchema } from '../../validation/niaFormSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
 import * as nationalIdService from '../../services/nationalIdService';
 
-const Modification = () => {
+const INITIAL_VALUES = {
+  msisdn: '',
+  pinNumber: '',
+  surname: '',
+  forenames: '',
+  dateOfBirth: '',
+  gender: '',
+  nextOfKin: '',
+};
+
+const RegistrationMFS = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.auth.user);
@@ -271,14 +281,4 @@ const Modification = () => {
   );
 };
 
-const INITIAL_VALUES = {
-  msisdn: '',
-  pinNumber: '',
-  surname: '',
-  forenames: '',
-  dateOfBirth: '',
-  gender: '',
-  nextOfKin: '',
-};
-
-export default Modification;
+export default RegistrationMFS;

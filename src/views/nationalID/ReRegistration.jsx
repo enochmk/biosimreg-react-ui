@@ -4,11 +4,20 @@ import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 
 import ErrorMessage from '../../components/Forms/ErrorMessage';
-import validationSchema from '../../validation/niaModificationSchema';
+import { reRegistrationSchema as validationSchema } from '../../validation/niaFormSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
 import * as nationalIdService from '../../services/nationalIdService';
 
-const Modification = () => {
+const INITIAL_VALUES = {
+  msisdn: '',
+  pinNumber: '',
+  surname: '',
+  forenames: '',
+  dateOfBirth: '',
+  gender: '',
+};
+
+const ReRegistration = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [loading, setLoading] = useState(false);
@@ -219,13 +228,4 @@ const Modification = () => {
   );
 };
 
-const INITIAL_VALUES = {
-  msisdn: '',
-  pinNumber: '',
-  surname: '',
-  forenames: '',
-  dateOfBirth: '',
-  gender: '',
-};
-
-export default Modification;
+export default ReRegistration;
