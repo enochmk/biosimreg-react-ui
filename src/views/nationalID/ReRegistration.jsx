@@ -1,4 +1,3 @@
-import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
@@ -7,6 +6,7 @@ import ErrorMessage from '../../components/Forms/ErrorMessage';
 import { reRegistrationSchema as validationSchema } from '../../validation/niaFormSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
 import * as nationalIdService from '../../services/nationalIdService';
+import Alert from '../../components/Alerts/Alert';
 
 const INITIAL_VALUES = {
   msisdn: '',
@@ -20,19 +20,23 @@ const INITIAL_VALUES = {
 const ReRegistration = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const [responseInfo, setResponseInfo] = useState({
+    message: '',
+    status: '',
+    title: '',
+  });
   const [loading, setLoading] = useState(false);
-  const {
-    handleSubmit,
-    handleChange,
-    handleReset,
-    handleBlur,
-    values,
-    errors,
-  } = useFormik({
+  const formik = useFormik({
     initialValues: INITIAL_VALUES,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      onSubmit(values);
+      handleSubmit(values);
+    },
+    onReset: () => {
+      clearResponseInfo();
+    },
+    onChange: () => {
+      clearResponseInfo();
     },
   });
 
@@ -40,191 +44,215 @@ const ReRegistration = () => {
     dispatch(changeTitle('NIA Re-Registration'));
   }, [dispatch]);
 
-  const onSubmit = async (values) => {
+  const clearResponseInfo = () => {
+    setResponseInfo({
+      title: '',
+      message: '',
+      status: '',
+    });
+  };
+
+  const handleSubmit = async (values) => {
     setLoading(true);
 
     try {
       const response = await nationalIdService.reRegistration(user, values);
-      toast.success(response.message);
-      handleReset();
+
+      setResponseInfo({
+        title: 'Success!',
+        message: `${response.message}. SUUID: ${response.suuid}`,
+        status: 'success',
+      });
+
+      formik.handleReset();
     } catch (error) {
-      toast.error(error.message);
+      setResponseInfo({
+        title: 'Error!',
+        message: error.message,
+        status: 'error',
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-wrap">
-      <div className="w-full lg:w-8/12 px-4">
-        <div className="card card-bordered shadow-2xl">
-          <div className="card-body">
-            <h2 className="card-title">Complete Your Form</h2>
-            <form
-              onSubmit={handleSubmit}
-              onReset={handleReset}
-              className="flex-auto px-4 lg:px-10 py-10"
-            >
-              <div className="flex flex-row gap-x-3">
-                <div className="form-control flex-1">
-                  <label className="label">
-                    <span className="label-text">Pin Number</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="pinNumber"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.pinNumber}
-                    placeholder="GHA-123456789-0"
-                    className={
-                      'input input-info input-bordered ' +
-                      (errors.pinNumber && values.pinNumber
-                        ? 'input-error'
-                        : '')
-                    }
-                    required
-                  />
-                  <ErrorMessage
-                    input={values.pinNumber}
-                    message={errors.pinNumber}
-                  />
-                </div>
-
-                <div className="form-control flex-1">
-                  <label className="label">
-                    <span className="label-text">Surname</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="surname"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.surname}
-                    placeholder="KLUFIO"
-                    className={
-                      'input input-info input-bordered ' +
-                      (errors.surname && values.surname ? 'input-error' : '')
-                    }
-                    required
-                  />
-                  <ErrorMessage
-                    input={values.surname}
-                    message={errors.surname}
-                  />
-                </div>
-
-                <div className="form-control flex-1">
-                  <label className="label">
-                    <span className="label-text">Phone Number</span>
-                  </label>
-                  <input
-                    type="number"
-                    name="msisdn"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.msisdn}
-                    placeholder="0560043149"
-                    className={
-                      'input input-info input-bordered' +
-                      (errors.msisdn && values.msisdn ? 'input-error' : '')
-                    }
-                    required
-                  />
-                  <ErrorMessage input={values.msisdn} message={errors.msisdn} />
-                </div>
-              </div>
-
-              <div className="flex flex-row gap-x-3">
-                <div className="form-control flex-1">
-                  <label className="label">
-                    <span className="label-text">Forenames</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="forenames"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.forenames}
-                    placeholder="ENOCH MENSAH"
-                    className={
-                      'input input-info input-bordered' +
-                      (errors.forenames && values.forenames
-                        ? 'input-error'
-                        : '')
-                    }
-                    required
-                  />
-                  <ErrorMessage
-                    input={values.forenames}
-                    message={errors.forenames}
-                  />
-                </div>
-
-                <div className="form-control flex-1">
-                  <label className="label">
-                    <span className="label-text">Date Of Birth</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="dateOfBirth"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.dateOfBirth}
-                    placeholder="01011990"
-                    className={
-                      'input input-info input-bordered' +
-                      (errors.dateOfBirth && values.dateOfBirth
-                        ? 'input-error'
-                        : '')
-                    }
-                    required
-                  />
-                  <ErrorMessage
-                    input={values.dateOfBirth}
-                    message={errors.dateOfBirth}
-                  />
-                </div>
-
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Gender</span>
-                  </label>
-                  <select
-                    id="gender"
-                    value={values.gender}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className="select select-bordered select-info w-full max-w-xs"
-                  >
-                    <option value="" disabled="disabled">
-                      Select Gender
-                    </option>
-                    <option value="MALE" label="Male" />
-                    <option value="FEMALE" label="Female" />
-                  </select>
-
-                  <ErrorMessage input={values.gender} message={errors.gender} />
-                </div>
-              </div>
-
-              <div className="card-actions justify-end">
-                <button
-                  type="submit"
-                  className={'btn btn-sm btn-success ' + (loading && 'loading')}
-                >
-                  Register
-                </button>
-                <button type="reset" className="btn btn-sm btn-outline">
-                  Cancel
-                </button>
-              </div>
-            </form>
+    <main className="card border shadow-xl">
+      <form
+        className="card-body"
+        onSubmit={formik.handleSubmit}
+        onReset={formik.handleReset}
+      >
+        <h2 className="card-title text-gray-600">Complete The Form</h2>
+        <Alert
+          title={responseInfo.title}
+          message={responseInfo.message}
+          status={responseInfo.status}
+        />
+        <section className="lg:flex gap-x-2">
+          <div className="form-control flex-grow">
+            <label className="label">
+              <span className="label-text">Pin Number</span>
+            </label>
+            <input
+              type="text"
+              name="pinNumber"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.pinNumber}
+              placeholder="GHA-123456789-0"
+              className={
+                'input input-info input-bordered ' +
+                (formik.errors.pinNumber && formik.values.pinNumber
+                  ? 'input-error'
+                  : '')
+              }
+              required
+            />
+            <ErrorMessage
+              input={formik.values.pinNumber}
+              message={formik.errors.pinNumber}
+            />
           </div>
-        </div>
-      </div>
-      <div className="w-full lg:w-4/12 px-4"></div>
-    </div>
+
+          <div className="form-control flex-1">
+            <label className="label">
+              <span className="label-text">Surname</span>
+            </label>
+            <input
+              type="text"
+              name="surname"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.surname}
+              placeholder="KLUFIO"
+              className={
+                'input input-info input-bordered ' +
+                (formik.errors.surname && formik.values.surname
+                  ? 'input-error'
+                  : '')
+              }
+              required
+            />
+            <ErrorMessage
+              input={formik.values.surname}
+              message={formik.errors.surname}
+            />
+          </div>
+
+          <div className="form-control flex-1">
+            <label className="label">
+              <span className="label-text">Phone Number</span>
+            </label>
+            <input
+              type="number"
+              name="msisdn"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.msisdn}
+              placeholder="0560043149"
+              className={
+                'input input-info input-bordered' +
+                (formik.errors.msisdn && formik.values.msisdn
+                  ? 'input-error'
+                  : '')
+              }
+              required
+            />
+            <ErrorMessage
+              input={formik.values.msisdn}
+              message={formik.errors.msisdn}
+            />
+          </div>
+        </section>
+
+        <section className="lg:flex gap-x-2">
+          <div className="form-control flex-grow">
+            <label className="label">
+              <span className="label-text">Forenames</span>
+            </label>
+            <input
+              type="text"
+              name="forenames"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.forenames}
+              placeholder="ENOCH MENSAH"
+              className={
+                'input input-info input-bordered' +
+                (formik.errors.forenames && formik.values.forenames
+                  ? 'input-error'
+                  : '')
+              }
+              required
+            />
+            <ErrorMessage
+              input={formik.values.forenames}
+              message={formik.errors.forenames}
+            />
+          </div>
+
+          <div className="form-control flex-grow">
+            <label className="label">
+              <span className="label-text">Date Of Birth</span>
+            </label>
+            <input
+              type="text"
+              name="dateOfBirth"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.dateOfBirth}
+              placeholder="01011990"
+              className={
+                'input input-info input-bordered' +
+                (formik.errors.dateOfBirth && formik.values.dateOfBirth
+                  ? 'input-error'
+                  : '')
+              }
+              required
+            />
+            <ErrorMessage
+              input={formik.values.dateOfBirth}
+              message={formik.errors.dateOfBirth}
+            />
+          </div>
+
+          <div className="form-control flex-grow">
+            <label className="label">
+              <span className="label-text">Gender</span>
+            </label>
+            <select
+              id="gender"
+              value={formik.values.gender}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className="select select-bordered select-info w-full max-w-xs"
+            >
+              <option>Select Gender</option>
+              <option value="male" label="Male" />
+              <option value="female" label="Female" />
+            </select>
+
+            <ErrorMessage
+              input={formik.values.gender}
+              message={formik.errors.gender}
+            />
+          </div>
+        </section>
+
+        <footer className="card-actions justify-end">
+          <button
+            type="submit"
+            className={'btn btn-sm btn-success ' + (loading && 'loading')}
+          >
+            Register
+          </button>
+          <button type="reset" className="btn btn-sm btn-outline">
+            Cancel
+          </button>
+        </footer>
+      </form>
+    </main>
   );
 };
 
