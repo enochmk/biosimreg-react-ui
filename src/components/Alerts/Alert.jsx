@@ -1,13 +1,11 @@
 import ErrorIcon from './ErrorIcon';
 import SuccessIcon from './SuccessIcon';
 
-const Alert = ({ title, message, status }) => {
-  if (!message) {
-    return null;
-  }
+const Alert = ({ show, title, message, status }) => {
+  if (!show) return null;
 
   return (
-    <main className={`alert shadow-lg alert-${status}`}>
+    <main className={`alert shadow-lg alert-${status} rounded-none my-2`}>
       <div className="space-x-1 items-center">
         {status === 'success' ? <SuccessIcon /> : <ErrorIcon />}
         <span>

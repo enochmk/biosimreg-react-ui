@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import ErrorMessage from '../../components/Forms/ErrorMessage';
-import { reRegistrationSchema as validationSchema } from '../../validation/niaFormSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
-import * as nationalIdService from '../../services/nationalIdService';
+import { reRegistrationSchema as validationSchema } from '../../validation/niaFormSchema';
+import { reRegistration as api } from '../../services/nationalIdService';
+import ErrorMessage from '../../components/Forms/ErrorMessage';
 import Alert from '../../components/Alerts/Alert';
+import useRegistrationForm from '../../hooks/useRegistrationForm';
 
-const INITIAL_VALUES = {
+const initialState = {
   msisdn: '',
   pinNumber: '',
   surname: '',
@@ -19,62 +19,15 @@ const INITIAL_VALUES = {
 
 const ReRegistration = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
-  const [responseInfo, setResponseInfo] = useState({
-    message: '',
-    status: '',
-    title: '',
-  });
-  const [loading, setLoading] = useState(false);
-  const formik = useFormik({
-    initialValues: INITIAL_VALUES,
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      handleSubmit(values);
-    },
-    onReset: () => {
-      clearResponseInfo();
-    },
-    onChange: () => {
-      clearResponseInfo();
-    },
+  const [formik, responseInfo] = useRegistrationForm({
+    initialState,
+    validationSchema,
+    api,
   });
 
   useEffect(() => {
     dispatch(changeTitle('NIA Re-Registration'));
   }, [dispatch]);
-
-  const clearResponseInfo = () => {
-    setResponseInfo({
-      title: '',
-      message: '',
-      status: '',
-    });
-  };
-
-  const handleSubmit = async (values) => {
-    setLoading(true);
-
-    try {
-      const response = await nationalIdService.reRegistration(user, values);
-
-      setResponseInfo({
-        title: 'Success!',
-        message: `${response.message}. SUUID: ${response.suuid}`,
-        status: 'success',
-      });
-
-      formik.handleReset();
-    } catch (error) {
-      setResponseInfo({
-        title: 'Error!',
-        message: error.message,
-        status: 'error',
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <main className="card border shadow-xl">
@@ -85,6 +38,7 @@ const ReRegistration = () => {
       >
         <h2 className="card-title text-gray-600">Complete The Form</h2>
         <Alert
+          show={responseInfo.show}
           title={responseInfo.title}
           message={responseInfo.message}
           status={responseInfo.status}
@@ -243,9 +197,11 @@ const ReRegistration = () => {
         <footer className="card-actions justify-end">
           <button
             type="submit"
-            className={'btn btn-sm btn-success ' + (loading && 'loading')}
+            className={
+              'btn btn-sm btn-success ' + (formik.isSubmitting && 'loading')
+            }
           >
-            Register
+            Re-Register
           </button>
           <button type="reset" className="btn btn-sm btn-outline">
             Cancel

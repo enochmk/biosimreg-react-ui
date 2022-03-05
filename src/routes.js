@@ -15,17 +15,17 @@ const routes = [
       {
         title: 'Registration',
         link: '/admin/registration',
-        icon: 'fas fa-newspaper',
+        icon: 'fa-solid fa-user-plus',
       },
       {
         title: 'Re-Registration',
         link: '/admin/re-registration',
-        icon: 'fas fa-user-circle',
+        icon: 'fa-solid fa-rotate',
       },
       {
         title: 'MFS Registration',
         link: '/admin/mfs-registration',
-        icon: 'fas fa-user-circle',
+        icon: 'fas fa-money-check',
       },
     ],
   },

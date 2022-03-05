@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-import Alert from '../../components/Alerts/Alert';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
-import ErrorMessage from '../../components/Forms/ErrorMessage';
-import { registrationMFSSchema as validationSchema } from '../../validation/niaFormSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
-import * as nationalIdService from '../../services/nationalIdService';
+import { registrationMFSSchema as validationSchema } from '../../validation/niaFormSchema';
+import { registrationMFS as api } from '../../services/nationalIdService';
+import Alert from '../../components/Alerts/Alert';
+import ErrorMessage from '../../components/Forms/ErrorMessage';
+import useRegistrationForm from '../../hooks/useRegistrationForm';
 
-const INITIAL_VALUES = {
+const initialState = {
   msisdn: '',
   pinNumber: '',
   surname: '',
@@ -21,63 +21,15 @@ const INITIAL_VALUES = {
 
 const RegistrationMFS = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const [responseInfo, setResponseInfo] = useState({
-    message: '',
-    status: '',
-    title: '',
-  });
-  const user = useSelector((state) => state.auth.user);
-  const formik = useFormik({
-    initialValues: INITIAL_VALUES,
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      handleSubmit(values);
-    },
-    onReset: () => {
-      clearResponseInfo();
-    },
-    onChange: () => {
-      clearResponseInfo();
-    },
+  const [formik, responseInfo] = useRegistrationForm({
+    initialState,
+    validationSchema,
+    api,
   });
 
   useEffect(() => {
     dispatch(changeTitle('NIA MFS-Registration'));
   }, [dispatch]);
-
-  // handle submit
-  const handleSubmit = async (values) => {
-    setLoading(true);
-    clearResponseInfo();
-
-    try {
-      const response = await nationalIdService.registrationMFS(user, values);
-      setResponseInfo({
-        title: 'Success!',
-        message: response.message,
-        status: 'success',
-      });
-
-      formik.handleReset();
-    } catch (error) {
-      setResponseInfo({
-        title: 'Error!',
-        message: error.message,
-        status: 'error',
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const clearResponseInfo = () => {
-    setResponseInfo({
-      title: '',
-      message: '',
-      status: '',
-    });
-  };
 
   return (
     <main className="card border shadow-xl">
@@ -88,10 +40,11 @@ const RegistrationMFS = () => {
       >
         <h2 className="card-title text-gray-600">Complete The Form</h2>
         <Alert
+          show={responseInfo.show}
           title={responseInfo.title}
           message={responseInfo.message}
           status={responseInfo.status}
-        />{' '}
+        />
         <section className="lg:flex gap-x-2">
           <div className="form-control flex-grow">
             <label className="label">
@@ -291,9 +244,11 @@ const RegistrationMFS = () => {
         <footer className="card-actions justify-end">
           <button
             type="submit"
-            className={'btn btn-sm btn-success ' + (loading && 'loading')}
+            className={
+              'btn btn-sm btn-success ' + (formik.isSubmitting && 'loading')
+            }
           >
-            Register
+            Register MFS
           </button>
           <button type="reset" className="btn btn-sm btn-outline">
             Cancel

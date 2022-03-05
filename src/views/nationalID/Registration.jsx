@@ -1,15 +1,14 @@
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-import { useSelector } from 'react-redux';
 
-import ErrorMessage from '../../components/Forms/ErrorMessage';
-import { registrationSchema as validationSchema } from '../../validation/niaFormSchema';
 import { changeTitle } from '../../features/navbar/navbarSlice';
-import * as nationalIdService from '../../services/nationalIdService';
+import { registrationSchema as validationSchema } from '../../validation/niaFormSchema';
+import { registration as api } from '../../services/nationalIdService';
 import Alert from '../../components/Alerts/Alert';
+import ErrorMessage from '../../components/Forms/ErrorMessage';
+import useRegistrationForm from '../../hooks/useRegistrationForm';
 
-const INITIAL_VALUES = {
+const initialState = {
   pinNumber: '',
   surname: '',
   msisdn: '',
@@ -20,62 +19,15 @@ const INITIAL_VALUES = {
 
 const Registration = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const user = useSelector((state) => state.auth.user);
-  const [responseInfo, setResponseInfo] = useState({
-    message: '',
-    status: '',
-    title: '',
+  const [formik, responseInfo] = useRegistrationForm({
+    initialState,
+    validationSchema,
+    api,
   });
-  const formik = useFormik({
-    initialValues: INITIAL_VALUES,
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      handleSubmit(values);
-    },
-    onReset: () => {
-      clearResponseInfo();
-    },
-    onChange: () => {
-      clearResponseInfo();
-    },
-  });
-
-  const clearResponseInfo = () => {
-    setResponseInfo({
-      title: '',
-      message: '',
-      status: '',
-    });
-  };
 
   useEffect(() => {
     dispatch(changeTitle('NIA Registration'));
   }, [dispatch]);
-
-  // handle submit
-  const handleSubmit = async (values) => {
-    setLoading(true);
-    clearResponseInfo();
-
-    try {
-      const response = await nationalIdService.registration(user, values);
-      setResponseInfo({
-        title: 'Success!',
-        message: `${response.message}. SUUID: ${response.suuid}`,
-        status: 'success',
-      });
-      formik.handleReset();
-    } catch (error) {
-      setResponseInfo({
-        title: 'Error!',
-        message: error.message,
-        status: 'error',
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <main className="card border shadow-xl">
@@ -86,6 +38,7 @@ const Registration = () => {
       >
         <h2 className="card-title text-gray-600">Complete The Form</h2>
         <Alert
+          show={responseInfo.show}
           title={responseInfo.title}
           message={responseInfo.message}
           status={responseInfo.status}
@@ -248,7 +201,9 @@ const Registration = () => {
         <footer className="card-actions justify-end">
           <button
             type="submit"
-            className={'btn btn-sm btn-success ' + (loading && 'loading')}
+            className={
+              'btn btn-sm btn-success ' + (formik.isSubmitting && 'loading')
+            }
           >
             Register
           </button>
