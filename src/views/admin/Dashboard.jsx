@@ -6,17 +6,18 @@ import { useDispatch } from 'react-redux';
 // import CardPageVisits from '../../components/Cards/CardPageVisits';
 // import CardSocialTraffic from '../../components/Cards/CardSocialTraffic';
 import { changeTitle } from '../../features/navbar/navbarSlice';
+import HeaderStats from '../../components/Headers/HeaderStats';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(changeTitle('Dashboard'));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
+      <HeaderStats />
       <div className="flex flex-wrap">
         <div className="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
           {/* <CardLineChart /> */}

@@ -14,7 +14,7 @@ const initialState = {
   pinNumber: '',
   surname: '',
   forenames: '',
-  dateOfBirth: '',
+  dateOfBirth: '20-01-1980',
   gender: '',
 };
 
@@ -155,7 +155,7 @@ const ReRegistration = () => {
                   <span className="label-text">Date Of Birth</span>
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="dateOfBirth"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}

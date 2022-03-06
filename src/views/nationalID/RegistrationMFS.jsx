@@ -208,7 +208,7 @@ const RegistrationMFS = () => {
                   value={formik.values.gender}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className="select select-bordered select-info w-full max-w-xs"
+                  className="select select-bordered select-info w-full"
                 >
                   <option>Select Gender</option>
                   <option value="male" label="Male" />
@@ -225,7 +225,7 @@ const RegistrationMFS = () => {
                   <span className="label-text">Date Of Birth</span>
                 </label>
                 <input
-                  type="text"
+                  type="date"
                   name="dateOfBirth"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}

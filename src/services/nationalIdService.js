@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 const axiosInstance = axios.create({
   baseURL: 'http://10.81.1.188:5002/v1/nonbiometric/',
@@ -36,7 +37,7 @@ export const reRegistration = async (user, values) => {
     nationalID: values.pinNumber,
     surname: values.surname,
     forenames: values.forenames,
-    dateOfBirth: values.dateOfBirth,
+    dateOfBirth: moment(values.dateOfBirth, 'YYYY-MM-DD').format('DDMMYYYY'),
     gender: values.gender,
     channelID: 'web',
   };
@@ -57,11 +58,13 @@ export const registrationMFS = async (user, values) => {
     surname: values.surname,
     forenames: values.forenames,
     gender: values.gender,
-    dateOfBirth: values.dateOfBirth,
+    dateOfBirth: moment(values.dateOfBirth, 'MM-DD-YYYY').format('DDMMYYYY'),
     nextOfKin: values.nextOfKin,
     channelID: 'web',
     cellID: null,
   };
+
+  console.log({ data });
 
   try {
     const response = await axiosInstance.post('registrationMfs', data);
