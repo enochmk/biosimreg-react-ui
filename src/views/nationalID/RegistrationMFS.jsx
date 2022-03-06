@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { FaWpforms } from 'react-icons/fa';
 
 import { changeTitle } from '../../features/navbar/navbarSlice';
 import { registrationMFSSchema as validationSchema } from '../../validation/niaFormSchema';
@@ -42,7 +43,12 @@ const RegistrationMFS = () => {
             onReset={formik.handleReset}
             className="card-body"
           >
-            <h2 className="card-title text-gray-600">Complete The Form</h2>
+            <h2 className="card-title text-gray-600">
+              Complete The Form
+              <span className="inline-block mx-2">
+                <FaWpforms />
+              </span>
+            </h2>
             <Alert
               show={responseInfo.show}
               title={responseInfo.title}
@@ -62,9 +68,9 @@ const RegistrationMFS = () => {
                   value={formik.values.pinNumber}
                   placeholder="GHA-123456789-0"
                   className={
-                    'input input-info input-bordered ' +
+                    'input input-bordered' +
                     (formik.errors.pinNumber && formik.values.pinNumber
-                      ? 'input-error'
+                      ? ' input-error'
                       : '')
                   }
                   required
@@ -86,9 +92,9 @@ const RegistrationMFS = () => {
                   value={formik.values.surname}
                   placeholder="KLUFIO"
                   className={
-                    'input input-info input-bordered ' +
+                    'input input-bordered' +
                     (formik.errors.surname && formik.values.surname
-                      ? 'input-error'
+                      ? ' input-error'
                       : '')
                   }
                   required
@@ -103,16 +109,16 @@ const RegistrationMFS = () => {
                   <span className="label-text">Phone Number</span>
                 </label>
                 <input
-                  type="number"
+                  type="tel"
                   name="msisdn"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.msisdn}
                   placeholder="0560043149"
                   className={
-                    'input input-info input-bordered' +
+                    'input input-bordered' +
                     (formik.errors.msisdn && formik.values.msisdn
-                      ? 'input-error'
+                      ? ' input-error'
                       : '')
                   }
                   required
@@ -136,9 +142,9 @@ const RegistrationMFS = () => {
                   value={formik.values.forenames}
                   placeholder="ENOCH MENSAH"
                   className={
-                    'input input-info input-bordered' +
+                    'input input-bordered' +
                     (formik.errors.forenames && formik.values.forenames
-                      ? 'input-error'
+                      ? ' input-error'
                       : '')
                   }
                   required
@@ -160,9 +166,9 @@ const RegistrationMFS = () => {
                   value={formik.values.nextOfKin}
                   placeholder="John Smith"
                   className={
-                    'input input-info input-bordered' +
+                    'input input-bordered' +
                     (formik.errors.nextOfKin && formik.values.nextOfKin
-                      ? 'input-error'
+                      ? ' input-error'
                       : '')
                   }
                   required
@@ -177,17 +183,17 @@ const RegistrationMFS = () => {
                   <span className="label-text">Alternative Number</span>
                 </label>
                 <input
-                  type="number"
+                  type="tel"
                   name="alternativeNumber"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.alternativeNumber}
                   placeholder="0500025938"
                   className={
-                    'input input-info input-bordered' +
+                    'input input-bordered' +
                     (formik.errors.alternativeNumber &&
                     formik.values.alternativeNumber
-                      ? 'input-error'
+                      ? ' input-error'
                       : '')
                   }
                   required
@@ -232,9 +238,9 @@ const RegistrationMFS = () => {
                   value={formik.values.dateOfBirth}
                   placeholder="27041994"
                   className={
-                    'input input-info input-bordered' +
+                    'input input-bordered' +
                     (formik.errors.dateOfBirth && formik.values.dateOfBirth
-                      ? 'input-error'
+                      ? ' input-error'
                       : '')
                   }
                   required
@@ -249,8 +255,10 @@ const RegistrationMFS = () => {
               <button
                 type="submit"
                 className={
-                  'btn btn-sm btn-success ' + (formik.isSubmitting && 'loading')
+                  'btn btn-sm btn-success ' +
+                  (formik.isSubmitting && 'loading disabled')
                 }
+                disabled={formik.isSubmitting || !formik.isValid}
               >
                 Register MFS
               </button>

@@ -3,7 +3,7 @@ import moment from 'moment';
 
 const axiosInstance = axios.create({
   baseURL: 'http://10.81.1.188:5002/v1/nonbiometric/',
-  timeout: 10000,
+  timeout: 5000,
 });
 
 export const registration = async (user, values) => {

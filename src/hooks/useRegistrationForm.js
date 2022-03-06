@@ -16,6 +16,7 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
     onChange: () => {
       clearResponseInfo();
     },
+    validateOnBlur: true,
   });
 
   const [responseInfo, setResponseInfo] = useState({
