@@ -79,7 +79,7 @@ const ReRegistration = () => {
                 />
               </div>
 
-              <div className="form-control flex-1">
+              <div className="form-control flex-grow">
                 <label className="label">
                   <span className="label-text">Surname</span>
                 </label>
@@ -104,7 +104,7 @@ const ReRegistration = () => {
                 />
               </div>
 
-              <div className="form-control flex-1">
+              <div className="form-control flex-grow">
                 <label className="label">
                   <span className="label-text">Phone Number</span>
                 </label>
@@ -190,7 +190,7 @@ const ReRegistration = () => {
                   value={formik.values.gender}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className="select select-bordered select-info w-full max-w-xs"
+                  className="select select-bordered w-full"
                 >
                   <option>Select Gender</option>
                   <option value="male" label="Male" />

@@ -29,21 +29,21 @@ const routes = [
       },
     ],
   },
-  // {
-  //   title: 'Passport',
-  //   data: [
-  //     {
-  //       title: 'Registration',
-  //       link: '/admin/passport/registration',
-  //       icon: 'fas fa-newspaper',
-  //     },
-  //     {
-  //       title: 'Re-Registration',
-  //       link: '/admin/passport/modification',
-  //       icon: 'fas fa-user-circle',
-  //     },
-  //   ],
-  // },
+  {
+    title: 'Tools',
+    data: [
+      {
+        title: 'Subscriber`s Status',
+        link: '/admin/subscriber-status',
+        icon: 'fa-solid fa-info',
+      },
+      {
+        title: 'Validate National ID',
+        link: '/admin/validate-national-id',
+        icon: 'fa-solid fa-list',
+      },
+    ],
+  },
 ];
 
 export default routes;

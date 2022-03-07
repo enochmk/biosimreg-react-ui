@@ -20,7 +20,7 @@ const schema = {
   iccid: yup.string().min(6, 'Invalid Length.').required(),
   phoneNumber: yup
     .string()
-    .min(10, 'Invalid Phone Number.')
+    .min(9, 'Invalid Phone Number.')
     .max(10, 'Invalid Phone Number.')
     .required(),
   dateOfBirth: yup.string(),
@@ -47,7 +47,7 @@ export const registrationMFSSchema = yup.object({
 });
 
 export const reRegistrationSchema = yup.object({
-  pinNumber: schema.schema.pinNumber,
+  pinNumber: schema.pinNumber,
   surname: schema.name,
   forenames: schema.name,
   msisdn: schema.phoneNumber,

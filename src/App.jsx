@@ -12,6 +12,7 @@ import Dashboard from './views/admin/Dashboard';
 import NiaRegistration from './views/nationalID/Registration';
 import NiaReRegistration from './views/nationalID/ReRegistration';
 import NiaRegistrationMfs from './views/nationalID/RegistrationMFS';
+import SubscriberStatus from './views/tools/SubscriberStatus';
 import NotFound from './views/others/NotFound';
 import Unauthorized from './views/others/Unauthorized';
 import PersistLogin from './components/Others/PersistLogin';
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="registration" element={<NiaRegistration />} />
             <Route path="re-registration" element={<NiaReRegistration />} />
             <Route path="mfs-registration" element={<NiaRegistrationMfs />} />
+            <Route path="subscriber-status" element={<SubscriberStatus />} />
             <Route path="unauthorized" element={<Unauthorized />} />
           </Route>
         </Route>

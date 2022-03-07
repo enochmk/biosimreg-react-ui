@@ -19,6 +19,7 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
     validateOnBlur: true,
   });
 
+  const [responseData, setResponseData] = useState(null);
   const [responseInfo, setResponseInfo] = useState({
     show: false,
     title: 'info',
@@ -37,9 +38,11 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
 
   const handleSubmit = async () => {
     formik.setSubmitting(true);
+    setResponseData(null);
 
     try {
       const response = await api(user, formik.values);
+      setResponseData(response);
 
       setResponseInfo({
         show: true,
@@ -62,7 +65,7 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
     }
   };
 
-  return [formik, responseInfo];
+  return [formik, responseInfo, responseData, setResponseData];
 };
 
 export default useRegistrationForm;

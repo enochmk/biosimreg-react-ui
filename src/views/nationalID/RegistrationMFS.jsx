@@ -15,7 +15,7 @@ const initialState = {
   pinNumber: '',
   surname: '',
   forenames: '',
-  dateOfBirth: '',
+  dateOfBirth: '20-01-1980',
   gender: '',
   nextOfKin: '',
   alternativeNumber: '',
@@ -214,7 +214,7 @@ const RegistrationMFS = () => {
                   value={formik.values.gender}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className="select select-bordered select-info w-full"
+                  className="select select-bordered w-full"
                 >
                   <option>Select Gender</option>
                   <option value="male" label="Male" />
