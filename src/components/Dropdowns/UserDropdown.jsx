@@ -21,7 +21,7 @@ const UserDropdown = ({ firstName, lastName, role }) => {
       </button>
       <ul
         tabIndex="0"
-        className="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-1"
+        className="menu dropdown-content shadow bg-base-100 rounded-box w-52 mt-1"
       >
         <li className="items-center justify-center">
           <label className="font-bold">
