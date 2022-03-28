@@ -15,9 +15,9 @@ export default function Navbar() {
         </span>
         <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
           <UserDropdown
-            firstName={user?.firstName}
-            lastName={user?.lastName}
-            role={user?.role.name}
+            firstName={user?.FIRST_NAME}
+            lastName={user?.LAST_NAME}
+            role={user?.ROLE.KEYWORD}
           />
         </ul>
       </div>

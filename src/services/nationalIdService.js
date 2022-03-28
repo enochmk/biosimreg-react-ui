@@ -2,12 +2,13 @@ import axios from 'axios';
 import moment from 'moment';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://10.81.1.188:5002/v1/nonbiometric',
-  timeout: 5000,
+  baseURL: `${process.env.REACT_APP_SIMREG_URL}/nonbiometric`,
+  timeout: 60000,
 });
 
 export const registration = async (user, values) => {
   const data = {
+    requestID: Date.now().toString(),
     agentID: user.msisdn,
     nationalID: values.pinNumber,
     surname: values.surname,
@@ -32,6 +33,7 @@ export const registration = async (user, values) => {
 
 export const reRegistration = async (user, values) => {
   const data = {
+    requestID: Date.now().toString(),
     agentID: user.msisdn,
     msisdn: values.msisdn.toString(),
     nationalID: values.pinNumber,
@@ -52,10 +54,13 @@ export const reRegistration = async (user, values) => {
 
 export const registrationMFS = async (user, values) => {
   const data = {
+    ...values,
+    dateOfBirth: moment(values.dateOfBirth, 'YYYY-MM-DD').format('DDMMYYYY'),
+    nationalID: values.pinNumber,
+    requestID: Date.now().toString(),
     agentID: user.msisdn,
     msisdn: values.msisdn.toString(),
     channelID: 'web',
-    cellID: null,
   };
 
   try {
