@@ -136,7 +136,7 @@ const Registration = () => {
                   <span className="label-text">Last 6 digits of ICCID</span>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   name="iccid"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
