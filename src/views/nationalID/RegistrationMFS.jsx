@@ -19,6 +19,7 @@ const initialState = {
   gender: '',
   nextOfKin: '',
   alternativeNumber: '',
+  cellID: '',
 };
 
 const RegistrationMFS = () => {
@@ -114,7 +115,7 @@ const RegistrationMFS = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.msisdn}
-                  placeholder="0560043149"
+                  placeholder="560043149"
                   className={
                     'input input-bordered' +
                     (formik.errors.msisdn && formik.values.msisdn
@@ -188,7 +189,7 @@ const RegistrationMFS = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.alternativeNumber}
-                  placeholder="0500025938"
+                  placeholder="500025938"
                   className={
                     'input input-bordered' +
                     (formik.errors.alternativeNumber &&

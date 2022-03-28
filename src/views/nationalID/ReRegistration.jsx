@@ -114,7 +114,7 @@ const ReRegistration = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.msisdn}
-                  placeholder="0560043149"
+                  placeholder="560043149"
                   className={
                     'input input-bordered' +
                     (formik.errors.msisdn && formik.values.msisdn
