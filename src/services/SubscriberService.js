@@ -2,15 +2,15 @@ import axios from 'axios';
 
 const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_SIMREG_URL}/subscriber`,
-  // timeout: 5000,
+  timeout: 60000,
 });
 
 export const getSubscriberStatus = async (user, values) => {
   const data = {
-    agentID: user.msisdn,
+    agentID: user.MSISDN,
     msisdn: values.msisdn.toString(),
     channelID: 'web',
-    cellID: null,
+    cellID: 'null',
   };
 
   try {
