@@ -12,7 +12,7 @@ import Dashboard from './views/admin/Dashboard';
 import NiaRegistration from './views/nationalID/Registration';
 import NiaReRegistration from './views/nationalID/ReRegistration';
 import NiaRegistrationMfs from './views/nationalID/RegistrationMFS';
-import SubscriberStatus from './views/tools/SubscriberStatus';
+import SubscriberStatus from './views/SubscriberStatus/SubscriberStatus';
 import NotFound from './views/others/NotFound';
 import Unauthorized from './views/others/Unauthorized';
 import PersistLogin from './components/Others/PersistLogin';
