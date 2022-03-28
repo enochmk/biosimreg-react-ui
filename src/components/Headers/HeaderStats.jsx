@@ -16,13 +16,20 @@ const HeaderStats = () => {
     });
   }, [dispatch, axios]);
 
+  const {
+    dailyBcapCount,
+    dailyLinkingCount,
+    totalBcapCount,
+    totalLinkingCount,
+  } = data;
+
   return (
     <section className="relative bg-blue-500 md:pt-32 pb-32 pt-12 w-full">
       <main className="px-4 md:px-10 mx-auto w-full flex flex-wrap">
         <article className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total Linking"
-            statTitle={data?.linking?.total_linking_count.toString() || 'N/A'}
+            statTitle={totalLinkingCount.toString() || 'N/A'}
             statArrow="up"
             statPercent=""
             statPercentColor="text-emerald-500"
@@ -34,7 +41,7 @@ const HeaderStats = () => {
         <article className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Total BCAP"
-            statTitle={data?.linking?.total_bcap_count.toString() || 'N/A'}
+            statTitle={totalBcapCount.toString() || 'N/A'}
             statArrow="up"
             statPercent=""
             statPercentColor="text-red-500"
@@ -46,7 +53,7 @@ const HeaderStats = () => {
         <article className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Daily Linking"
-            statTitle={data?.linking?.daily_linking_count.toString() || 'N/A'}
+            statTitle={dailyLinkingCount.toString() || 'N/A'}
             statArrow="up"
             statPercent=""
             statPercentColor="text-orange-500"
@@ -58,7 +65,7 @@ const HeaderStats = () => {
         <article className="w-full lg:w-6/12 xl:w-3/12 px-4">
           <CardStats
             statSubtitle="Daily BCAP"
-            statTitle={data?.linking?.daily_bcap_count.toString() || 'N/A'}
+            statTitle={dailyBcapCount.toString() || 'N/A'}
             statArrow="up"
             statPercent=""
             statPercentColor="text-emerald-500"
