@@ -45,7 +45,7 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
 
   const errorInfo = (message) => {
     setResponseInfo({
-      show: false,
+      show: true,
       title: 'Error!',
       status: 'error',
       message,
@@ -58,8 +58,10 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
 
     try {
       const response = await api(user, formik.values);
-      setResponseData(response);
-      successInfo(`${response.message}. SUUID: ${response.suuid}`);
+      setResponseData({ ...response, msisdn: formik.values.msisdn });
+      successInfo(
+        `${response.message ? response.message : ''} SUUID: ${response.suuid}`,
+      );
 
       // reset the form to initial state
       formik.handleReset();

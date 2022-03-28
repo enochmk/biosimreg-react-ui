@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import SubsciberInfoItem from './SubscriberInfoItem';
 
-const SubscriberInfo = ({ data }) => {
+const SubscriberInfo = ({ data, msisdn, ...rest }) => {
   const [open, setOpen] = useState(false);
-  const [subscriberInfo, setSubscriberInfo] = useState({
+  const [info, setInfo] = useState({
+    msisdn: '',
     name: '',
     suuid: '',
     bcap: '',
@@ -11,15 +12,18 @@ const SubscriberInfo = ({ data }) => {
 
   useEffect(() => {
     if (data) {
-      setSubscriberInfo({
+      setInfo({
         name: data.name,
+        msisdn: data.msisdn,
         suuid: data.suuid,
         bcap: data.bcap,
       });
+
       setOpen(true);
     } else {
       setOpen(false);
-      setSubscriberInfo({
+      setInfo({
+        msisdn: '',
         name: '',
         suuid: '',
         bcap: '',
@@ -37,13 +41,13 @@ const SubscriberInfo = ({ data }) => {
     <div className={open ? 'modal modal-open' : 'modal'}>
       <div className="modal-box">
         <h2 className="card-title text-gray-600">
-          Subscriber's Registration Status
+          Registration Status: {info.msisdn}
         </h2>
         <div className="divider"></div>
         <main className="flex flex-col gap-2 w-3/4">
-          <SubsciberInfoItem title="Full Name" value={subscriberInfo.name} />
-          <SubsciberInfoItem title="Unique Code" value={subscriberInfo.suuid} />
-          <SubsciberInfoItem title="BCAP" value={subscriberInfo.bcap} />
+          <SubsciberInfoItem title="Full Name" value={info.name} />
+          <SubsciberInfoItem title="Unique Code" value={info.suuid} />
+          <SubsciberInfoItem title="BCAP" value={info.bcap ? 'YES' : 'NO'} />
         </main>
         <div className="modal-action">
           <button className="btn" onClick={handleClose}>

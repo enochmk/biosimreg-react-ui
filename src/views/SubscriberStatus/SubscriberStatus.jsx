@@ -92,7 +92,7 @@ const SubscriberStatus = () => {
             </footer>
           </form>
         </div>
-        <SubscriberInfo data={responseData} />
+        <SubscriberInfo data={responseData} msisdn={''} />
       </main>
     </>
   );
