@@ -165,7 +165,7 @@ const RegistrationMFS = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.nextOfKin}
-                  placeholder="John Smith"
+                  placeholder="JOHN SMITH"
                   className={
                     'input input-bordered' +
                     (formik.errors.nextOfKin && formik.values.nextOfKin
