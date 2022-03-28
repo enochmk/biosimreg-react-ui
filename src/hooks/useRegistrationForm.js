@@ -10,9 +10,7 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
     onSubmit: () => {
       handleSubmit();
     },
-    onReset: () => {
-      clearResponseInfo();
-    },
+    onReset: () => {},
     onChange: () => {
       clearResponseInfo();
     },
@@ -36,6 +34,24 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
     });
   };
 
+  const successInfo = (message) => {
+    setResponseInfo({
+      show: true,
+      title: 'Success!',
+      status: 'success',
+      message,
+    });
+  };
+
+  const errorInfo = (message) => {
+    setResponseInfo({
+      show: false,
+      title: 'Error!',
+      status: 'error',
+      message,
+    });
+  };
+
   const handleSubmit = async () => {
     formik.setSubmitting(true);
     setResponseData(null);
@@ -43,23 +59,12 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
     try {
       const response = await api(user, formik.values);
       setResponseData(response);
-
-      setResponseInfo({
-        show: true,
-        title: 'Success!',
-        message: `${response.message}. SUUID: ${response.suuid}`,
-        status: 'success',
-      });
+      successInfo(`${response.message}. SUUID: ${response.suuid}`);
 
       // reset the form to initial state
       formik.handleReset();
     } catch (error) {
-      setResponseInfo({
-        show: true,
-        title: 'Error!',
-        message: error.message,
-        status: 'error',
-      });
+      errorInfo(error.message);
     } finally {
       formik.setSubmitting(false);
     }

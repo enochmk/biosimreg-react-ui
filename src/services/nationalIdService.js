@@ -23,8 +23,6 @@ export const registration = async (user, values) => {
     channelID: 'web',
   };
 
-  console.log({ data });
-
   try {
     const response = await axiosInstance.post('registration', data);
     return response.data;
