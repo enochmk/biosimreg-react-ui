@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/enochmk/biosimreg-react-ui/compare/v0.1.3...v0.1.4) (2022-03-28)
+
+
+### Features
+
+* :sparkles: check subscriber info ([74142fe](https://github.com/enochmk/biosimreg-react-ui/commit/74142fe334aeef4bb8d29c19595365e223451831))
+
+
+### Bug Fixes
+
+* :bug: agent ID not showing when checking subscriber info ([23e3dec](https://github.com/enochmk/biosimreg-react-ui/commit/23e3dec141ac1f6d571501e650a1bad0f313c593))
+* :bug: agentID not parsing to NIA requests ([639deb2](https://github.com/enochmk/biosimreg-react-ui/commit/639deb2647824c5e87933e401d4fbee6b3ee7179))
+* :bug: consistency show alert color ([ea65d09](https://github.com/enochmk/biosimreg-react-ui/commit/ea65d09e0c7adb65dd81ad84fe2cbe411243999f))
+* :bug: fix ICCID not accepting full correct value ([77fad9b](https://github.com/enochmk/biosimreg-react-ui/commit/77fad9bb0242d099071ffdc4b69d31b6b554f17e))
+* :bug: fix user stats not showing ([fb4331c](https://github.com/enochmk/biosimreg-react-ui/commit/fb4331c2cbe7acdf20438aa8145c5e168fa2f840))
+* :bug: reference SubscriberStatus page correctly ([d21a0ab](https://github.com/enochmk/biosimreg-react-ui/commit/d21a0ab3a10b5eb20a1b071360fb2275a327ded6))
+* :bug: suuid not showing ([300ee0b](https://github.com/enochmk/biosimreg-react-ui/commit/300ee0b6517bff13e998b6d459d56f1990beb7a3))
+
 ### [0.1.3](https://github.com/enochmk/biosimreg-react-ui/compare/v0.1.2...v0.1.3) (2022-03-07)
 
 
