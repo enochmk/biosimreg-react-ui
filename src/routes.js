@@ -37,11 +37,11 @@ const routes = [
         link: '/admin/subscriber-status',
         icon: 'fa-solid fa-info',
       },
-      {
-        title: 'Validate National ID',
-        link: '/admin/validate-national-id',
-        icon: 'fa-solid fa-list',
-      },
+      // {
+      //   title: 'Validate National ID',
+      //   link: '/admin/validate-national-id',
+      //   icon: 'fa-solid fa-list',
+      // },
     ],
   },
 ];
