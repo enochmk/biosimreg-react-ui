@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 export const registration = async (user, values) => {
   const data = {
     requestID: Date.now().toString(),
-    agentID: user.msisdn,
+    agentID: user.MSISDN,
     nationalID: values.pinNumber,
     surname: values.surname,
     msisdn: values.msisdn.toString(),
@@ -23,6 +23,8 @@ export const registration = async (user, values) => {
     channelID: 'web',
   };
 
+  console.log({ data });
+
   try {
     const response = await axiosInstance.post('registration', data);
     return response.data;
@@ -34,7 +36,7 @@ export const registration = async (user, values) => {
 export const reRegistration = async (user, values) => {
   const data = {
     requestID: Date.now().toString(),
-    agentID: user.msisdn,
+    agentID: user.MSISDN,
     msisdn: values.msisdn.toString(),
     nationalID: values.pinNumber,
     surname: values.surname,
@@ -58,7 +60,7 @@ export const registrationMFS = async (user, values) => {
     dateOfBirth: moment(values.dateOfBirth, 'YYYY-MM-DD').format('DDMMYYYY'),
     nationalID: values.pinNumber,
     requestID: Date.now().toString(),
-    agentID: user.msisdn,
+    agentID: user.MSISDN,
     msisdn: values.msisdn.toString(),
     channelID: 'web',
   };
