@@ -112,6 +112,11 @@ export const authSlice = createSlice({
         state.accessToken = null;
         state.isLoggedIn = false;
       })
+      .addCase(logout.rejected, (state) => {
+        state.user = null;
+        state.accessToken = null;
+        state.isLoggedIn = false;
+      })
       .addCase(updateUserProfile.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
