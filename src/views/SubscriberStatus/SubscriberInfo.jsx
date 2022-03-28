@@ -11,11 +11,10 @@ const SubscriberInfo = ({ data }) => {
 
   useEffect(() => {
     if (data) {
-      const dataArray = data?.text?.split('\n');
       setSubscriberInfo({
-        name: dataArray[0]?.split(':')[1],
-        suuid: dataArray[1]?.split(':')[1],
-        bcap: dataArray[2]?.split(':')[1],
+        name: data.name,
+        suuid: data.suuid,
+        bcap: data.bcap,
       });
       setOpen(true);
     } else {

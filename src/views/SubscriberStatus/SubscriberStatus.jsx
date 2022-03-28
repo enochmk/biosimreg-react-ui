@@ -60,7 +60,7 @@ const SubscriberStatus = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.msisdn}
-                  placeholder="0560043149"
+                  placeholder="560043149"
                   className={
                     'uppercase input input-bordered w-1/2' +
                     (formik.errors.msisdn && formik.values.msisdn
