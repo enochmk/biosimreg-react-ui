@@ -47,6 +47,7 @@
     "react-scripts": "5.0.0",
     "react-toastify": "^8.1.1",
     "redux": "^4.1.2",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.2",
     "yup": "^0.32.11"
   },
@@ -70,7 +71,7 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "npx commitlint --edit $1"
+      "pre-commit": " npm run pretty-quick && npm run lint-staged"
     }
   },
   "config": {
