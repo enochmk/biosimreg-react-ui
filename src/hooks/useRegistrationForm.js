@@ -59,13 +59,14 @@ const useRegistrationForm = ({ initialState, validationSchema, api }) => {
     try {
       const response = await api(user, formik.values);
       setResponseData({ ...response, msisdn: formik.values.msisdn });
-      successInfo(
-        `${response.message ? response.message : ''} SUUID: ${response.suuid}`,
-      );
+      successInfo(`${response.message ? response.message : ''} SUUID: ${response.suuid}`);
 
       // reset the form to initial state
       formik.handleReset();
     } catch (error) {
+      if (error.response) {
+        errorInfo(error.response.data.message);
+      }
       errorInfo(error.message);
     } finally {
       formik.setSubmitting(false);

@@ -9,9 +9,9 @@ import AuthLayout from './layouts/AuthLayout';
 import Login from './views/auth/Login';
 import ForgotPassword from './views/auth/ForgotPassword';
 import Dashboard from './views/admin/Dashboard';
-import NiaRegistration from './views/nationalID/Registration';
-import NiaReRegistration from './views/nationalID/ReRegistration';
-import NiaRegistrationMfs from './views/nationalID/RegistrationMFS';
+import Registration from './views/nationalId/Registration';
+import Linking from './views/nationalId/BasicLink';
+import MfsRegistration from './views/nationalId/MfsRegistration';
 import SubscriberStatus from './views/SubscriberStatus/SubscriberStatus';
 import NotFound from './views/others/NotFound';
 import Unauthorized from './views/others/Unauthorized';
@@ -33,9 +33,9 @@ const App = () => {
         <Route element={<PersistLogin />}>
           <Route path="admin" element={<AdminLayout />}>
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="registration" element={<NiaRegistration />} />
-            <Route path="re-registration" element={<NiaReRegistration />} />
-            <Route path="mfs-registration" element={<NiaRegistrationMfs />} />
+            <Route path="register" element={<Registration />} />
+            <Route path="linking" element={<Linking />} />
+            <Route path="register-mfs" element={<MfsRegistration />} />
             <Route path="subscriber-status" element={<SubscriberStatus />} />
             <Route path="unauthorized" element={<Unauthorized />} />
           </Route>

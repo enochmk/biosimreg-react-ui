@@ -4,7 +4,7 @@ import { FaWpforms } from 'react-icons/fa';
 
 import { changeTitle } from '../../features/navbar/navbarSlice';
 import { registrationSchema as validationSchema } from '../../validation/niaFormSchema';
-import { registration as api } from '../../services/nationalIdService';
+import api from '../../services/nationalId/register.js';
 import Alert from '../../components/Alerts/Alert';
 import ErrorMessage from '../../components/Forms/ErrorMessage';
 import useRegistrationForm from '../../hooks/useRegistrationForm';
@@ -28,7 +28,7 @@ const Registration = () => {
   });
 
   useEffect(() => {
-    dispatch(changeTitle('NIA Registration'));
+    dispatch(changeTitle('National ID Registration'));
   }, [dispatch]);
 
   return (
@@ -36,11 +36,7 @@ const Registration = () => {
       <HeaderStats />
       <main className="px-4 md:px-10 mx-auto w-full m-24">
         <div className="card border shadow-xl ">
-          <form
-            className="card-body"
-            onSubmit={formik.handleSubmit}
-            onReset={formik.handleReset}
-          >
+          <form className="card-body" onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
             <h2 className="card-title text-gray-600">
               Complete The Form
               <span className="inline-block mx-2">
@@ -67,16 +63,11 @@ const Registration = () => {
                   placeholder="GHA-123456789-0"
                   className={
                     'uppercase input input-bordered ' +
-                    (formik.errors.pinNumber && formik.values.pinNumber
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.pinNumber && formik.values.pinNumber ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.pinNumber}
-                  message={formik.errors.pinNumber}
-                />
+                <ErrorMessage input={formik.values.pinNumber} message={formik.errors.pinNumber} />
               </div>
 
               <div className="form-control flex-grow">
@@ -92,16 +83,11 @@ const Registration = () => {
                   placeholder="KLUFIO"
                   className={
                     'uppercase input input-bordered' +
-                    (formik.errors.surname && formik.values.surname
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.surname && formik.values.surname ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.surname}
-                  message={formik.errors.surname}
-                />
+                <ErrorMessage input={formik.values.surname} message={formik.errors.surname} />
               </div>
 
               <div className="form-control flex-grow">
@@ -117,16 +103,11 @@ const Registration = () => {
                   placeholder="560043149"
                   className={
                     'input input-bordered' +
-                    (formik.errors.msisdn && formik.values.msisdn
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.msisdn && formik.values.msisdn ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.msisdn}
-                  message={formik.errors.msisdn}
-                />
+                <ErrorMessage input={formik.values.msisdn} message={formik.errors.msisdn} />
               </div>
             </section>
 
@@ -144,16 +125,11 @@ const Registration = () => {
                   placeholder="789345"
                   className={
                     'input input-bordered' +
-                    (formik.errors.iccid && formik.values.iccid
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.iccid && formik.values.iccid ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.iccid}
-                  message={formik.errors.iccid}
-                />
+                <ErrorMessage input={formik.values.iccid} message={formik.errors.iccid} />
               </div>
 
               <div className="form-control flex-grow">
@@ -169,16 +145,11 @@ const Registration = () => {
                   placeholder="John Smith"
                   className={
                     'uppercase input input-bordered' +
-                    (formik.errors.nextOfKin && formik.values.nextOfKin
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.nextOfKin && formik.values.nextOfKin ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.nextOfKin}
-                  message={formik.errors.nextOfKin}
-                />
+                <ErrorMessage input={formik.values.nextOfKin} message={formik.errors.nextOfKin} />
               </div>
 
               <div className="form-control flex-grow">
@@ -194,8 +165,7 @@ const Registration = () => {
                   placeholder="500025938"
                   className={
                     'input input-bordered' +
-                    (formik.errors.alternativeNumber &&
-                    formik.values.alternativeNumber
+                    (formik.errors.alternativeNumber && formik.values.alternativeNumber
                       ? ' input-error'
                       : '')
                   }
@@ -211,10 +181,7 @@ const Registration = () => {
             <footer className="card-actions justify-end">
               <button
                 type="submit"
-                className={
-                  'btn btn-sm btn-success ' +
-                  (formik.isSubmitting && 'loading disabled')
-                }
+                className={'btn btn-sm btn-success ' + (formik.isSubmitting && 'loading disabled')}
                 disabled={formik.isSubmitting || !formik.isValid}
               >
                 Register

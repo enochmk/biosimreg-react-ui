@@ -14,17 +14,17 @@ const routes = [
     data: [
       {
         title: 'Registration',
-        link: '/admin/registration',
+        link: '/admin/register',
         icon: 'fa-solid fa-user-plus',
       },
       {
-        title: 'Re-Registration',
-        link: '/admin/re-registration',
+        title: 'Basic Linking',
+        link: '/admin/linking',
         icon: 'fa-solid fa-rotate',
       },
       {
         title: 'MFS Registration',
-        link: '/admin/mfs-registration',
+        link: '/admin/register-mfs',
         icon: 'fas fa-money-check',
       },
     ],

@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as authService from './authService';
 
 const user = JSON.parse(localStorage.getItem('user'));
-
 const INITIAL_STATE = {
   user: user ? user : null,
   accessToken: null,
@@ -28,41 +27,33 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 
     return { accessToken: accessToken };
   } catch (error) {
-    const message =
-      error.response?.data?.message || error.message || error.toString();
+    const message = error.response?.data?.message || error.message || error.toString();
 
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-export const updateUserProfile = createAsyncThunk(
-  'profile/user',
-  async (data, thunkAPI) => {
-    const { accessToken } = data;
+export const updateUserProfile = createAsyncThunk('profile/user', async (data, thunkAPI) => {
+  const { accessToken } = data;
 
-    try {
-      // get user details using the accessToken
-      const profileResponse = await authService.updateUserProfile({
-        accessToken,
-      });
+  try {
+    // get user details using the accessToken
+    const profileResponse = await authService.updateUserProfile({
+      accessToken,
+    });
 
-      const user = profileResponse.user;
+    const user = profileResponse.user;
 
-      return { user };
-    } catch (error) {
-      const message =
-        error.response?.data?.message || error.message || error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  },
-);
+    return { user };
+  } catch (error) {
+    const message = error.response?.data?.message || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
 
-export const logout = createAsyncThunk(
-  'auth/logout',
-  async (user, thunkAPI) => {
-    return await authService.logout();
-  },
-);
+export const logout = createAsyncThunk('auth/logout', async (user, thunkAPI) => {
+  return await authService.logout();
+});
 
 // slice
 export const authSlice = createSlice({

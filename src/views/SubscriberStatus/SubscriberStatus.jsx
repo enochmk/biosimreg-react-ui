@@ -4,7 +4,7 @@ import { FaWpforms } from 'react-icons/fa';
 
 import { changeTitle } from '../../features/navbar/navbarSlice';
 import { getSubscriberSchema as validationSchema } from '../../validation/subsciberSchema';
-import { getSubscriberStatus as api } from '../../services/SubscriberService';
+import api from '../../services/subscriber/subscriberStatus';
 import Alert from '../../components/Alerts/Alert';
 import ErrorMessage from '../../components/Forms/ErrorMessage';
 import useRegistrationForm from '../../hooks/useRegistrationForm';
@@ -32,11 +32,7 @@ const SubscriberStatus = () => {
       <HeaderStats />
       <main className="px-4 md:px-10 mx-auto w-full m-24">
         <div className="card border shadow-xl ">
-          <form
-            className="card-body"
-            onSubmit={formik.handleSubmit}
-            onReset={formik.handleReset}
-          >
+          <form className="card-body" onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
             <h2 className="card-title text-gray-600">
               Check Subscriber's Status
               <span className="inline-block mx-2">
@@ -63,26 +59,18 @@ const SubscriberStatus = () => {
                   placeholder="560043149"
                   className={
                     'uppercase input input-bordered w-1/2' +
-                    (formik.errors.msisdn && formik.values.msisdn
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.msisdn && formik.values.msisdn ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.msisdn}
-                  message={formik.errors.msisdn}
-                />
+                <ErrorMessage input={formik.values.msisdn} message={formik.errors.msisdn} />
               </div>
             </section>
             <footer className="card-actions justify-start w-1/2">
               <button
                 type="submit"
                 disabled={formik.isSubmitting || !formik.isValid}
-                className={
-                  'btn btn-sm btn-success ' +
-                  (formik.isSubmitting && 'loading disabled')
-                }
+                className={'btn btn-sm btn-success ' + (formik.isSubmitting && 'loading disabled')}
               >
                 Check
               </button>

@@ -4,7 +4,7 @@ import { FaWpforms } from 'react-icons/fa';
 
 import { changeTitle } from '../../features/navbar/navbarSlice';
 import { reRegistrationSchema as validationSchema } from '../../validation/niaFormSchema';
-import { reRegistration as api } from '../../services/nationalIdService';
+import api from '../../services/nationalId/basicLink';
 import ErrorMessage from '../../components/Forms/ErrorMessage';
 import Alert from '../../components/Alerts/Alert';
 import useRegistrationForm from '../../hooks/useRegistrationForm';
@@ -19,7 +19,7 @@ const initialState = {
   gender: '',
 };
 
-const ReRegistration = () => {
+const BasicLink = () => {
   const dispatch = useDispatch();
   const [formik, responseInfo] = useRegistrationForm({
     initialState,
@@ -28,7 +28,7 @@ const ReRegistration = () => {
   });
 
   useEffect(() => {
-    dispatch(changeTitle('NIA Re-Registration'));
+    dispatch(changeTitle('National ID Linking'));
   }, [dispatch]);
 
   return (
@@ -36,11 +36,7 @@ const ReRegistration = () => {
       <HeaderStats />
       <main className="px-4 md:px-10 mx-auto w-full m-24">
         <div className="card border shadow-xl">
-          <form
-            className="card-body"
-            onSubmit={formik.handleSubmit}
-            onReset={formik.handleReset}
-          >
+          <form className="card-body" onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
             <h2 className="card-title text-gray-600">
               Complete The Form
               <span className="inline-block mx-2">
@@ -67,16 +63,11 @@ const ReRegistration = () => {
                   placeholder="GHA-123456789-0"
                   className={
                     'input input-bordered' +
-                    (formik.errors.pinNumber && formik.values.pinNumber
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.pinNumber && formik.values.pinNumber ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.pinNumber}
-                  message={formik.errors.pinNumber}
-                />
+                <ErrorMessage input={formik.values.pinNumber} message={formik.errors.pinNumber} />
               </div>
 
               <div className="form-control flex-grow">
@@ -92,16 +83,11 @@ const ReRegistration = () => {
                   placeholder="KLUFIO"
                   className={
                     'input input-bordered' +
-                    (formik.errors.surname && formik.values.surname
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.surname && formik.values.surname ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.surname}
-                  message={formik.errors.surname}
-                />
+                <ErrorMessage input={formik.values.surname} message={formik.errors.surname} />
               </div>
 
               <div className="form-control flex-grow">
@@ -117,16 +103,11 @@ const ReRegistration = () => {
                   placeholder="560043149"
                   className={
                     'input input-bordered' +
-                    (formik.errors.msisdn && formik.values.msisdn
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.msisdn && formik.values.msisdn ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.msisdn}
-                  message={formik.errors.msisdn}
-                />
+                <ErrorMessage input={formik.values.msisdn} message={formik.errors.msisdn} />
               </div>
             </section>
 
@@ -144,16 +125,11 @@ const ReRegistration = () => {
                   placeholder="ENOCH MENSAH"
                   className={
                     'input input-bordered' +
-                    (formik.errors.forenames && formik.values.forenames
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.forenames && formik.values.forenames ? ' input-error' : '')
                   }
                   required
                 />
-                <ErrorMessage
-                  input={formik.values.forenames}
-                  message={formik.errors.forenames}
-                />
+                <ErrorMessage input={formik.values.forenames} message={formik.errors.forenames} />
               </div>
 
               <div className="form-control flex-grow">
@@ -169,9 +145,7 @@ const ReRegistration = () => {
                   placeholder="01011990"
                   className={
                     'input input-bordered' +
-                    (formik.errors.dateOfBirth && formik.values.dateOfBirth
-                      ? ' input-error'
-                      : '')
+                    (formik.errors.dateOfBirth && formik.values.dateOfBirth ? ' input-error' : '')
                   }
                   required
                 />
@@ -197,20 +171,14 @@ const ReRegistration = () => {
                   <option value="female" label="Female" />
                 </select>
 
-                <ErrorMessage
-                  input={formik.values.gender}
-                  message={formik.errors.gender}
-                />
+                <ErrorMessage input={formik.values.gender} message={formik.errors.gender} />
               </div>
             </section>
 
             <footer className="card-actions justify-end">
               <button
                 type="submit"
-                className={
-                  'btn btn-sm btn-success ' +
-                  (formik.isSubmitting && 'loading disabled')
-                }
+                className={'btn btn-sm btn-success ' + (formik.isSubmitting && 'loading disabled')}
                 disabled={formik.isSubmitting || !formik.isValid}
               >
                 Re-Register
@@ -226,4 +194,4 @@ const ReRegistration = () => {
   );
 };
 
-export default ReRegistration;
+export default BasicLink;
